@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d8ced10b-2854-4cea-9f36-a556547f0dba" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/VMtranslator/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/VMtranslator/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/VMtranslator/VMtranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/VMtranslator/VMtranslator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +42,7 @@
     <configuration name="VMtranslator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.test.VMtranslator.VMtranslator" />
       <module name="VMTranslator.main" />
-      <option name="PROGRAM_PARAMETERS" value="test.vm" />
+      <option name="PROGRAM_PARAMETERS" value="SimpleAdd.vm" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.test.VMtranslator.*" />
@@ -83,14 +85,18 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="137" y="20" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1578928902720">
+    <state x="137" y="20" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579354084033">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="137" y="20" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1578928902720" />
+    <state x="137" y="20" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1579354084033" />
     <state x="471" y="223" width="424" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1579015935856">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="471" y="223" width="424" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1579015935856" />
+    <state width="417" height="438" key="DebuggerActiveHint" timestamp="1579355267160">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="417" height="438" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1579355267160" />
     <state x="417" y="126" key="EnvironmentVariablesDialog" timestamp="1578928485404">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -99,22 +105,38 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="401" y="85" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1579017172798" />
-    <state width="1286" height="163" key="GridCell.Tab.0.bottom" timestamp="1578929016364">
+    <state width="1323" height="178" key="GridCell.Tab.0.bottom" timestamp="1579359636892">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1286" height="163" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1578929016364" />
-    <state width="1286" height="163" key="GridCell.Tab.0.center" timestamp="1578929016364">
+    <state width="1323" height="178" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1579359636892" />
+    <state width="1323" height="178" key="GridCell.Tab.0.center" timestamp="1579359636892">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1286" height="163" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1578929016364" />
-    <state width="1286" height="163" key="GridCell.Tab.0.left" timestamp="1578929016363">
+    <state width="1323" height="178" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1579359636892" />
+    <state width="1323" height="178" key="GridCell.Tab.0.left" timestamp="1579359636892">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1286" height="163" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1578929016363" />
-    <state width="1286" height="163" key="GridCell.Tab.0.right" timestamp="1578929016364">
+    <state width="1323" height="178" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1579359636892" />
+    <state width="1323" height="178" key="GridCell.Tab.0.right" timestamp="1579359636892">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1286" height="163" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1578929016364" />
+    <state width="1323" height="178" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1579359636892" />
+    <state width="1323" height="223" key="GridCell.Tab.1.bottom" timestamp="1579359636650">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1579359636650" />
+    <state width="1323" height="223" key="GridCell.Tab.1.center" timestamp="1579359636650">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="223" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1579359636650" />
+    <state width="1323" height="223" key="GridCell.Tab.1.left" timestamp="1579359636650">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="223" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1579359636650" />
+    <state width="1323" height="223" key="GridCell.Tab.1.right" timestamp="1579359636650">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="223" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1579359636650" />
     <state x="184" y="7" key="SettingsEditor" timestamp="1579017180117">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -123,13 +145,34 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="485" y="142" key="chooseDestDirectoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1578928422803" />
-    <state x="370" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1579098333684">
+    <state x="370" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1579352405230">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="370" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1579098333684" />
+    <state x="370" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1579352405230" />
     <state x="478" y="54" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1578928805389">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="478" y="54" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1578928805389" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/test/VMtranslator/Parser.java</url>
+          <line>84</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/test/VMtranslator/Parser.java</url>
+          <line>68</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Remote">
+        <watch expression="instrRemoveComment.length()" language="JAVA" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

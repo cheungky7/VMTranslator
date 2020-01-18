@@ -43,17 +43,29 @@ public class Parser {
             return COMMAND_TYPE.C_POP;
         }
 
+        if(cmStr.equals("add")){
+            return COMMAND_TYPE.C_ARITHMETIC;
+        }
+
         return COMMAND_TYPE.C_INVALID;
 
     }
 
-    void advance() throws IOException{
+    private void clearInternalPara(){
+        m_Arg1=null;
+        m_Arg2=0;
+        m_CmdType=COMMAND_TYPE.C_INVALID;
+
+    }
+
+    public void advance() throws IOException{
 
         while(true) {
            // String commandType=null;
            // String arg1=null;
            // String arg2=null;
             m_current_instr = m_reade.readLine();
+            clearInternalPara();
             if (m_current_instr == null) {
                 m_haveMoreCmd = false;
                 break;
@@ -61,11 +73,15 @@ public class Parser {
 
             int firstPosOfComment=m_current_instr.indexOf("//");
             // turn the instruction into array of string tokens by white space
-            String instrRemoveComment=m_current_instr.substring(0,firstPosOfComment);
-            String[] tokens = instrRemoveComment.trim().split("\\s+");
-            if(tokens.length==0) {
+            String instrRemoveComment=m_current_instr;
+            if(firstPosOfComment!=-1) {
+                instrRemoveComment = m_current_instr.substring(0, firstPosOfComment);
+            }
+
+            if(instrRemoveComment.length()==0) {
                 continue; // if only comment and space skip this line
             }
+            String[] tokens = instrRemoveComment.trim().split("\\s+");
             if(tokens.length>0) {
                 m_CmdType = convertCMDStrToEun(tokens[0]);
             }
@@ -82,12 +98,20 @@ public class Parser {
 
     }
 
+    public boolean hasMoreCommands(){
+        return this.m_haveMoreCmd;
+    }
+
     public String getArg1(){
         return this.m_Arg1;
     }
 
     public int getArg2(){
         return this.m_Arg2;
+    }
+
+    public COMMAND_TYPE getCommandType(){
+        return this.m_CmdType;
     }
 
     public void close() throws IOException{
