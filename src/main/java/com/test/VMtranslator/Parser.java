@@ -5,28 +5,19 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-enum  COMMAND_TYPE {
-    C_ARITHMETIC,
-    C_PUSH,
-    C_POP,
-    C_LABEL,
-    C_GOTO,
-    C_IF,
-    C_FUNCTION,
-    C_RETURN,
-    C_CALL,
-    C_INVALID
-};
 
 public class Parser {
 
   //  private String m_vmFileName;
+    /*
     private String m_Arg1;
     private int m_Arg2;
     private COMMAND_TYPE m_CmdType;
+     */
     private BufferedReader m_reade;
     private String m_current_instr;
     private boolean m_haveMoreCmd;
+    private Instruction m_parsed_instr;
 
     public Parser(String filename) throws IOException {
         File file=new File(filename);
@@ -50,13 +41,14 @@ public class Parser {
         return COMMAND_TYPE.C_INVALID;
 
     }
-
+/*
     private void clearInternalPara(){
-        m_Arg1=null;
-        m_Arg2=0;
-        m_CmdType=COMMAND_TYPE.C_INVALID;
+        //m_Arg1=null;
+        //m_Arg2=0;
+        //m_CmdType=COMMAND_TYPE.C_INVALID;
 
     }
+ */
 
     public void advance() throws IOException{
 
@@ -64,8 +56,13 @@ public class Parser {
            // String commandType=null;
            // String arg1=null;
            // String arg2=null;
+            COMMAND_TYPE CmdType=COMMAND_TYPE.C_NULL;
+            String arg1=null;
+            int arg2=0;
+            m_parsed_instr=null;
+
             m_current_instr = m_reade.readLine();
-            clearInternalPara();
+           // clearInternalPara();
             if (m_current_instr == null) {
                 m_haveMoreCmd = false;
                 break;
@@ -83,14 +80,16 @@ public class Parser {
             }
             String[] tokens = instrRemoveComment.trim().split("\\s+");
             if(tokens.length>0) {
-                m_CmdType = convertCMDStrToEun(tokens[0]);
+                CmdType = convertCMDStrToEun(tokens[0]);
             }
             if(tokens.length>1) {
-                m_Arg1 = tokens[1];
+                arg1 = tokens[1];
             }
             if(tokens.length>2) {
-                m_Arg2 =Integer.parseInt( tokens[2]);
+                arg2 =Integer.parseInt( tokens[2]);
             }
+
+            m_parsed_instr=new  Instruction(CmdType,arg1,arg2);
 
             break;
         }
@@ -102,16 +101,8 @@ public class Parser {
         return this.m_haveMoreCmd;
     }
 
-    public String getArg1(){
-        return this.m_Arg1;
-    }
-
-    public int getArg2(){
-        return this.m_Arg2;
-    }
-
-    public COMMAND_TYPE getCommandType(){
-        return this.m_CmdType;
+    public Instruction getParsedInstr(){
+        return this.m_parsed_instr;
     }
 
     public void close() throws IOException{
