@@ -9,17 +9,7 @@ public class CodeWriter {
     private String m_fileName;
     private BufferedWriter m_writer;
 
-    /*
-    @Test
-    public void givenWritingStringToFile_whenUsingPrintWriter_thenCorrect()
-            throws IOException {
-        FileWriter fileWriter = new FileWriter(fileName);
-        PrintWriter printWriter = new PrintWriter(fileWriter);
-        printWriter.print("Some String");
-        printWriter.printf("Product name is %s and its price is %d $", "iPhone", 1000);
-        printWriter.close();
-    }
-     */
+
 
     public CodeWriter(String fileName) throws IOException {
         m_fileName=fileName;
@@ -31,20 +21,15 @@ public class CodeWriter {
     }
 
     public void writeAssemblyCode(Instruction instr) throws IOException {
-        // write
-        /*
-          System.out.println("line:"+line+",comand:"+parsedInstr.getCommandType()+",arg1:"
-                           +parsedInstr.getArg1()+",arg2:"+parsedInstr.getArg2());
-         */
+        // write comment of the parsered
         m_writer.write("//"+instr.getCmd()+" "+instr.getArg1()+" "+instr.getArg2()+"\n");
-
 
         if(instr.getCommandType()==COMMAND_TYPE.C_ARITHMETIC){
             writeArithmetic(instr);
-        }
-
-        if(instr.getCommandType()==COMMAND_TYPE.C_PUSH){
-            WritePushPop(instr);
+        }else if(instr.getCommandType()==COMMAND_TYPE.C_PUSH){
+            WritePush(instr);
+        } else if(instr.getCommandType()==COMMAND_TYPE.C_POP) {
+            WritePop(instr);
         }
 
     }
@@ -53,9 +38,22 @@ public class CodeWriter {
 
     }
 
-    public void WritePushPop(Instruction instr){
-
+    public void WritePush(Instruction instr) throws IOException {
+        if(instr.getArg1().equals("constant")) {
+            m_writer.write("@" + instr.getArg2() + "\n");
+            m_writer.write("D=A\n");
+            m_writer.write("@SP\n");
+            m_writer.write("A=M\n");
+            m_writer.write("M=D\n");
+            m_writer.write("@SP\n");
+            m_writer.write("M=M+1\n");
+        }
         
+    }
+
+    public void WritePop(Instruction instr){
+
+
     }
 
 }
