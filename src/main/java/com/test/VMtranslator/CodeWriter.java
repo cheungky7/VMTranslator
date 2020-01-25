@@ -13,7 +13,7 @@ public class CodeWriter {
 
     public CodeWriter(String fileName) throws IOException {
         m_fileName=fileName;
-        m_writer= new BufferedWriter(new FileWriter(m_fileName, true));
+        m_writer= new BufferedWriter(new FileWriter(m_fileName, false));
     }
 
     public void close() throws IOException {
@@ -34,7 +34,15 @@ public class CodeWriter {
 
     }
 
-    public void writeArithmetic(Instruction instr){
+    public void writeArithmetic(Instruction instr) throws IOException {
+        if(instr.getCmd().equals("add")){
+            m_writer.write("@SP\n");
+            m_writer.write("D=M\n"); // put the lower variable into D
+            m_writer.write("@SP\n");
+            m_writer.write("M=A-1\n"); //decrease stack pointer
+            m_writer.write("@SP\n");
+            m_writer.write("M=D+M\n");
+        }
 
     }
 
