@@ -25,22 +25,7 @@ public class Parser {
         m_haveMoreCmd=true;
     }
 
-    private COMMAND_TYPE convertCMDStrToEun(String cmStr){
-        if(cmStr.equals("push")){
-            return COMMAND_TYPE.C_PUSH;
-        }
 
-        if(cmStr.equals("pop")){
-            return COMMAND_TYPE.C_POP;
-        }
-
-        if(cmStr.equals("add")){
-            return COMMAND_TYPE.C_ARITHMETIC;
-        }
-
-        return COMMAND_TYPE.C_INVALID;
-
-    }
 /*
     private void clearInternalPara(){
         //m_Arg1=null;
@@ -56,7 +41,8 @@ public class Parser {
            // String commandType=null;
            // String arg1=null;
            // String arg2=null;
-            COMMAND_TYPE CmdType=COMMAND_TYPE.C_NULL;
+            //COMMAND_TYPE CmdType=COMMAND_TYPE.C_NULL;
+            String Cmd=null;
             String arg1=null;
             int arg2=0;
             m_parsed_instr=null;
@@ -80,7 +66,7 @@ public class Parser {
             }
             String[] tokens = instrRemoveComment.trim().split("\\s+");
             if(tokens.length>0) {
-                CmdType = convertCMDStrToEun(tokens[0]);
+                Cmd = (tokens[0]);
             }
             if(tokens.length>1) {
                 arg1 = tokens[1];
@@ -89,7 +75,7 @@ public class Parser {
                 arg2 =Integer.parseInt( tokens[2]);
             }
 
-            m_parsed_instr=new  Instruction(CmdType,arg1,arg2);
+            m_parsed_instr=new  Instruction(Cmd,arg1,arg2);
 
             break;
         }

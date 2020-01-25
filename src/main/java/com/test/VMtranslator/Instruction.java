@@ -19,9 +19,28 @@ public class Instruction {
     private String m_Arg1;
     private int m_Arg2;
     private COMMAND_TYPE m_CmdType;
+    private String m_Cmd;
 
-    public Instruction(COMMAND_TYPE CmdType,String Arg1, int Arg2){
-        m_CmdType=CmdType;
+    private COMMAND_TYPE convertCMDStrToEun(String cmStr){
+        if(cmStr.equals("push")){
+            return COMMAND_TYPE.C_PUSH;
+        }
+
+        if(cmStr.equals("pop")){
+            return COMMAND_TYPE.C_POP;
+        }
+
+        if(cmStr.equals("add")){
+            return COMMAND_TYPE.C_ARITHMETIC;
+        }
+
+        return COMMAND_TYPE.C_INVALID;
+
+    }
+
+    public Instruction(String Cmd,String Arg1, int Arg2){
+        m_CmdType=convertCMDStrToEun(Cmd);
+        m_Cmd=Cmd;
         m_Arg1=Arg1;
         m_Arg2=Arg2;
     }
@@ -36,6 +55,10 @@ public class Instruction {
 
     public COMMAND_TYPE getCommandType(){
         return this.m_CmdType;
+    }
+
+    public String getCmd(){
+        return this.m_Cmd;
     }
 
 
