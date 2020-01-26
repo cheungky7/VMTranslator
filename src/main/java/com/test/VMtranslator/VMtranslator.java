@@ -14,6 +14,7 @@ public class VMtranslator {
             Parser parser = new Parser(sourceFileName);
             CodeWriter coder=new CodeWriter(outFile);
             int line=0;
+            coder.InitMemorySegement();
            while(parser.hasMoreCommands()==true){
                parser.advance();
                Instruction parsedInstr=parser.getParsedInstr();

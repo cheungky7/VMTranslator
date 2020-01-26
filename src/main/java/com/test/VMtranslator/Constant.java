@@ -6,4 +6,5 @@ public class Constant {
     public static final int ARG=2;
     public static final int THIS=3;
     public static final int THAT=4;
+    public static final int SP_BASE_ADDR=256;
 }

@@ -34,13 +34,35 @@ public class CodeWriter {
 
     }
 
+    public void InitMemorySegement() throws IOException {
+        m_writer.write("@"+Constant.SP_BASE_ADDR+"\n");
+        m_writer.write("D=A\n");
+        m_writer.write("@"+Constant.SP+"\n");
+        m_writer.write("M=D\n");
+    }
+
     public void writeArithmetic(Instruction instr) throws IOException {
         if(instr.getCmd().equals("add")){
-            m_writer.write("@SP\n");
+           // m_writer.write("@SP\n");
+            /*
+            m_writer.write("@"+Constant.SP+"\n");
             m_writer.write("D=M\n"); // put the lower variable into D
-            m_writer.write("@SP\n");
+           // m_writer.write("@SP\n");
+            m_writer.write("@"+Constant.SP+"\n");
             m_writer.write("M=A-1\n"); //decrease stack pointer
-            m_writer.write("@SP\n");
+            //m_writer.write("@SP\n");
+            m_writer.write("@"+Constant.SP+"\n");
+            m_writer.write("M=D+M\n");
+             */
+            m_writer.write("@"+Constant.SP+"\n");
+            m_writer.write("M=M-1\n"); // decrease the stack pointer first
+            m_writer.write("@"+Constant.SP+"\n");
+            m_writer.write("D=M\n");
+            m_writer.write("A=D\n");
+            m_writer.write("D=M\n");
+            m_writer.write("@"+Constant.SP+"\n");
+            m_writer.write("M=M-1\n");
+            m_writer.write("A=M\n");
             m_writer.write("M=D+M\n");
         }
 
@@ -50,10 +72,12 @@ public class CodeWriter {
         if(instr.getArg1().equals("constant")) {
             m_writer.write("@" + instr.getArg2() + "\n");
             m_writer.write("D=A\n");
-            m_writer.write("@SP\n");
+           // m_writer.write("@SP\n");
+            m_writer.write("@"+Constant.SP+"\n");
             m_writer.write("A=M\n");
             m_writer.write("M=D\n");
-            m_writer.write("@SP\n");
+            //m_writer.write("@SP\n");
+            m_writer.write("@"+Constant.SP+"\n");
             m_writer.write("M=M+1\n");
         }
         
