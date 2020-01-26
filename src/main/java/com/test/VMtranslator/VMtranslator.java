@@ -28,6 +28,7 @@ public class VMtranslator {
                }
                line++;
            }
+           coder.WriteProgramEnd();
            parser.close();
            coder.close();
         }catch(Exception e){

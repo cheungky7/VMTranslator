@@ -84,6 +84,18 @@ public class CodeWriter {
         
     }
 
+    public void WriteProgramEnd() throws IOException {
+        /*
+        (END)
+        @END
+        0;JMP
+         */
+        m_writer.write("(END)\n");
+        m_writer.write("@END\n");
+        m_writer.write("0;JMP");
+
+    }
+
     public void WritePop(Instruction instr){
 
 
