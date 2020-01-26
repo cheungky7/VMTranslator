@@ -61,9 +61,10 @@ public class CodeWriter {
             m_writer.write("A=D\n");
             m_writer.write("D=M\n");
             m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n");
-            m_writer.write("A=M\n");
+          //  m_writer.write("M=M-1\n");
+            m_writer.write("A=M-1\n");
             m_writer.write("M=D+M\n");
+
         }
 
     }
