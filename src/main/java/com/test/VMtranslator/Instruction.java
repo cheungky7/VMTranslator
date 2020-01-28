@@ -31,7 +31,8 @@ public class Instruction {
         }
 
         if(cmStr.equals("add") || cmStr.equals("sub") || cmStr.equals("eq")|| cmStr.equals("or")
-        || cmStr.equals("and") || cmStr.equals("neg")|| cmStr.equals("not")){
+        || cmStr.equals("and") || cmStr.equals("neg")|| cmStr.equals("not") ||  cmStr.equals("lt")
+        ||  cmStr.equals("gt")){
             return COMMAND_TYPE.C_ARITHMETIC;
         }
 

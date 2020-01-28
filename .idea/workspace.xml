@@ -4,6 +4,8 @@
     <list default="true" id="d8ced10b-2854-4cea-9f36-a556547f0dba" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/VMtranslator/CodeWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/VMtranslator/CodeWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/VMtranslator/Instruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/VMtranslator/Instruction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/VMtranslator/VMtranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/VMtranslator/VMtranslator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +43,7 @@
     <configuration name="VMtranslator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.test.VMtranslator.VMtranslator" />
       <module name="VMTranslator.main" />
-      <option name="PROGRAM_PARAMETERS" value="SimpleAdd.vm" />
+      <option name="PROGRAM_PARAMETERS" value="StackTest.vm" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.test.VMtranslator.*" />
@@ -81,17 +83,33 @@
       <option name="presentableId" value="Default" />
       <updated>1578927759737</updated>
     </task>
+    <task id="LOCAL-00001" summary="Add add or not neg eq command translation">
+      <created>1580185816214</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1580185816214</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add add or not neg eq command translation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add add or not neg eq command translation" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="137" y="20" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579354084033">
+    <state x="137" y="20" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1580187190463">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="137" y="20" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1579354084033" />
+    <state x="137" y="20" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1580187190463" />
     <state x="471" y="223" width="424" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1579015935856">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="471" y="223" width="424" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1579015935856" />
+    <state x="267" y="0" key="CommitChangelistDialog2" timestamp="1580185814641">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="267" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1580185814641" />
     <state width="417" height="438" key="DebuggerActiveHint" timestamp="1579355267160">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -104,38 +122,38 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="401" y="85" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1579017172798" />
-    <state width="1323" height="223" key="GridCell.Tab.0.bottom" timestamp="1580037590353">
+    <state width="1286" height="88" key="GridCell.Tab.0.bottom" timestamp="1580205024675">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1580037590353" />
-    <state width="1323" height="223" key="GridCell.Tab.0.center" timestamp="1580037590353">
+    <state width="1286" height="88" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1580205024675" />
+    <state width="1286" height="88" key="GridCell.Tab.0.center" timestamp="1580205024675">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1580037590353" />
-    <state width="1323" height="223" key="GridCell.Tab.0.left" timestamp="1580037590353">
+    <state width="1286" height="88" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1580205024675" />
+    <state width="1286" height="88" key="GridCell.Tab.0.left" timestamp="1580205024675">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1580037590353" />
-    <state width="1323" height="223" key="GridCell.Tab.0.right" timestamp="1580037590353">
+    <state width="1286" height="88" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1580205024675" />
+    <state width="1286" height="88" key="GridCell.Tab.0.right" timestamp="1580205024675">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1580037590353" />
-    <state width="1323" height="223" key="GridCell.Tab.1.bottom" timestamp="1580037590353">
+    <state width="1286" height="88" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1580205024675" />
+    <state width="1286" height="88" key="GridCell.Tab.1.bottom" timestamp="1580205024592">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1580037590353" />
-    <state width="1323" height="223" key="GridCell.Tab.1.center" timestamp="1580037590353">
+    <state width="1286" height="88" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1580205024592" />
+    <state width="1286" height="88" key="GridCell.Tab.1.center" timestamp="1580205024591">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1580037590353" />
-    <state width="1323" height="223" key="GridCell.Tab.1.left" timestamp="1580037590353">
+    <state width="1286" height="88" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1580205024591" />
+    <state width="1286" height="88" key="GridCell.Tab.1.left" timestamp="1580205024591">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1580037590353" />
-    <state width="1323" height="223" key="GridCell.Tab.1.right" timestamp="1580037590353">
+    <state width="1286" height="88" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1580205024591" />
+    <state width="1286" height="88" key="GridCell.Tab.1.right" timestamp="1580205024591">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1580037590353" />
+    <state width="1286" height="88" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1580205024591" />
     <state x="382" y="75" key="RollbackChangesDialog" timestamp="1580107709500">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -148,10 +166,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="485" y="142" key="chooseDestDirectoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1578928422803" />
-    <state x="370" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1580105052599">
+    <state x="370" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1580182011100">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="370" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1580105052599" />
+    <state x="370" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1580182011100" />
     <state x="478" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1579530732032">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

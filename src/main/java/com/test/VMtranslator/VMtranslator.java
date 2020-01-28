@@ -5,12 +5,14 @@ public class VMtranslator {
     public static void main(String[] args){
         String sourceFileName = args[0];
         System.out.printf("The input file is %s\n",sourceFileName);
-        int posOfExtension = sourceFileName.indexOf(".vm");
-        String fileName=sourceFileName.substring(0, posOfExtension);
-        String outFile=fileName+".asm";
+
 
 
         try {
+            int posOfExtension = sourceFileName.indexOf(".vm");
+            String fileName=sourceFileName.substring(0, posOfExtension);
+            String outFile=fileName+".asm";
+
             Parser parser = new Parser(sourceFileName);
             CodeWriter coder=new CodeWriter(outFile);
             int line=0;

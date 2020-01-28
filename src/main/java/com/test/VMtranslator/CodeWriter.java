@@ -93,22 +93,22 @@ public class CodeWriter {
             m_writer.write("A=M\n");   // M is now point to 1 st variable
             m_writer.write("D=M-D\n"); // substract 1st variable from 2nd variable
             m_writer.write("M=-1\n"); // if two variable is equal put -1 into 1 st variable
-            m_writer.write("@EQ_LABEL"+this.gtCmdCounter+"\n");
+            m_writer.write("@GT_LABEL"+this.gtCmdCounter+"\n");
             m_writer.write("D,JGT\n");
             m_writer.write("@"+Constant.SP+"\n");
             m_writer.write("A=M\n");
             m_writer.write("M=0\n");
-            m_writer.write("(EQ_LABEL"+this.gtCmdCounter+")\n");
+            m_writer.write("(GT_LABEL"+this.gtCmdCounter+")\n");
             m_writer.write("@"+Constant.SP+"\n");
             m_writer.write("M=M+1\n");
+            gtCmdCounter++;
 
         }else if(instr.getCmd().equals("lt")) {
 
             m_writer.write("@"+Constant.SP+"\n");
             m_writer.write("M=M-1\n"); // decrease the stack pointer first
-            //m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("D=M\n");//put the 2nd variable in D
             m_writer.write("A=M\n");
+            m_writer.write("D=M\n");//put the 2nd variable in D
             m_writer.write("@"+Constant.SP+"\n");
             m_writer.write("M=M-1\n");
             m_writer.write("A=M\n");   // M is now point to 1 st variable
@@ -122,6 +122,7 @@ public class CodeWriter {
             m_writer.write("(LT_LABEL"+this.ltCmdCounter+")\n");
             m_writer.write("@"+Constant.SP+"\n");
             m_writer.write("M=M+1\n");
+            ltCmdCounter++;
 
         }else if(instr.getCmd().equals("sub")){
 
