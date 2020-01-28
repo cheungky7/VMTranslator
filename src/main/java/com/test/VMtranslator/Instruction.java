@@ -30,7 +30,8 @@ public class Instruction {
             return COMMAND_TYPE.C_POP;
         }
 
-        if(cmStr.equals("add")){
+        if(cmStr.equals("add") || cmStr.equals("sub") || cmStr.equals("eq")|| cmStr.equals("or")
+        || cmStr.equals("and") || cmStr.equals("neg")|| cmStr.equals("not")){
             return COMMAND_TYPE.C_ARITHMETIC;
         }
 
