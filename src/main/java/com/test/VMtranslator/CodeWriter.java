@@ -197,6 +197,18 @@ public class CodeWriter {
             //m_writer.write("@SP\n");
             m_writer.write("@"+Constant.SP+"\n");
             m_writer.write("M=M+1\n");
+        } else if(instr.getArg1().equals("static")) {
+            int index=instr.getArg2()+Constant.STATIC_BASE_ADDR;
+            m_writer.write("@" + index + "\n");
+            m_writer.write("D=M\n");
+            // m_writer.write("@SP\n");
+            m_writer.write("@"+Constant.SP+"\n");
+            m_writer.write("A=M\n");
+            m_writer.write("M=D\n");
+            //m_writer.write("@SP\n");
+            m_writer.write("@"+Constant.SP+"\n");
+            m_writer.write("M=M+1\n");
+
         }
         
     }
