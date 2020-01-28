@@ -57,7 +57,8 @@ public class CodeWriter {
             m_writer.write("M=M-1\n");
             m_writer.write("A=M\n");   // M is now point to 1 st variable
             m_writer.write("M=D+M\n"); // add 1st variable from 2nd variable
-
+            m_writer.write("@"+Constant.SP+"\n");
+            m_writer.write("M=M+1\n"); // increase the stack pointer
 
         } else if (instr.getCmd().equals("eq")){
             
@@ -134,6 +135,8 @@ public class CodeWriter {
             m_writer.write("M=M-1\n");
             m_writer.write("A=M\n");   // M is now point to 1 st variable
             m_writer.write("M=M-D\n"); // substract 1st variable from 2nd variable
+            m_writer.write("@"+Constant.SP+"\n");
+            m_writer.write("M=M+1\n");
 
         }else if(instr.getCmd().equals("or")){
 
@@ -145,6 +148,8 @@ public class CodeWriter {
             m_writer.write("M=M-1\n");
             m_writer.write("A=M\n");   // M is now point to 1 st variable
             m_writer.write("M=D|M\n"); // substract 1st variable from 2nd variable
+            m_writer.write("@"+Constant.SP+"\n");
+            m_writer.write("M=M+1\n");
 
         }else if(instr.getCmd().equals("and")){
 
@@ -156,25 +161,26 @@ public class CodeWriter {
             m_writer.write("M=M-1\n");
             m_writer.write("A=M\n");   // M is now point to 1 st variable
             m_writer.write("M=D&M\n"); // substract 1st variable from 2nd variable
+            m_writer.write("@"+Constant.SP+"\n");
+            m_writer.write("M=M+1\n");
 
         } else if(instr.getCmd().equals("not")){
 
             m_writer.write("@"+Constant.SP+"\n");
             m_writer.write("M=M-1\n"); // decrease the stack pointer first
-            m_writer.write("M=M-1\n");
             m_writer.write("A=M\n");   // M is now point to 1 st variable
             m_writer.write("M=!M\n"); // substract 1st variable from 2nd variable
+            m_writer.write("@"+Constant.SP+"\n");
+            m_writer.write("M=M+1\n");
 
         }else if(instr.getCmd().equals("neg")){
 
             m_writer.write("@"+Constant.SP+"\n");
             m_writer.write("M=M-1\n"); // decrease the stack pointer first
-            m_writer.write("D=0\n");//put the zero in D
-            m_writer.write("A=M\n");
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n");
             m_writer.write("A=M\n");   // M is now point to 1 st variable
-            m_writer.write("M=M-D\n"); // substract 1st variable from 2nd variable
+            m_writer.write("M=-M\n"); // substract 1st variable from 2nd variable
+            m_writer.write("@"+Constant.SP+"\n");
+            m_writer.write("M=M+1\n");
 
         }
 
