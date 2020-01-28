@@ -215,8 +215,19 @@ public class CodeWriter {
 
 
 
-    public void WritePop(Instruction instr){
+    public void WritePop(Instruction instr) throws IOException {
+        if(instr.getArg1().equals("static")){
+            int index=instr.getArg2()+Constant.STATIC_BASE_ADDR;
+            m_writer.write("@"+Constant.SP+"\n");
+            m_writer.write("M=M-1\n"); // decrease the stack pointer first
+            m_writer.write("A=M\n");
+            m_writer.write("D=M\n");//put the  variable from stack in D
+            m_writer.write("@"+index+"\n");
+            m_writer.write("M=D\n");//put the  variable from D to static location
+          //  m_writer.write("@"+Constant.SP+"\n");
+          //  m_writer.write("M=M-1\n");
 
+        }
 
     }
 
