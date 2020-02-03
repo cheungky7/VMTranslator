@@ -1,4 +1,7 @@
-package com.test.VMtranslator;
+
+import com.test.VMtranslator.CodeWriter;
+import com.test.VMtranslator.Instruction;
+import com.test.VMtranslator.Parser;
 
 public class VMtranslator {
 
