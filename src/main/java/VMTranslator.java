@@ -1,9 +1,4 @@
-
-import com.test.VMtranslator.CodeWriter;
-import com.test.VMtranslator.Instruction;
-import com.test.VMtranslator.Parser;
-
-public class VMtranslator {
+public class VMTranslator {
 
     public static void main(String[] args){
         String sourceFileName = args[0];

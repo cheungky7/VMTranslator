@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="d8ced10b-2854-4cea-9f36-a556547f0dba" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/VMtranslator/CodeWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/VMtranslator/CodeWriter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/VMtranslator/VMtranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/VMtranslator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/VMtranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/VMTranslator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/VMtranslator/CodeWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CodeWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/VMtranslator/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Constant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/VMtranslator/Instruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instruction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/VMtranslator/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,8 +59,8 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="VMtranslator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="VMtranslator" />
+    <configuration name="VMTranslator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="VMTranslator" />
       <module name="VMTranslator.main" />
       <option name="PROGRAM_PARAMETERS" value="StaticTest.vm" />
       <extension name="coverage">
@@ -72,7 +75,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.VMtranslator" />
+        <item itemvalue="Application.VMTranslator" />
       </list>
     </recent_temporary>
   </component>
@@ -143,11 +146,15 @@
     </state>
     <state x="137" y="20" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1580621347124" />
     <state x="193" y="29" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580702049559" />
-    <state x="662" y="319" width="424" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1580705330541">
+    <state x="662" y="319" width="424" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1580714309297">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="471" y="223" width="424" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1579015935856" />
-    <state x="662" y="319" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040@0.0.1920.1040" timestamp="1580705330541" />
+    <state x="662" y="319" width="424" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040@0.0.1920.1040" timestamp="1580714309297" />
+    <state x="787" y="391" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages" timestamp="1580714294040">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="787" y="391" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.0.1920.1040@0.0.1920.1040" timestamp="1580714294040" />
     <state x="211" y="191" width="943" height="345" key="#com.intellij.structuralsearch.plugin.ui.StructuralSearchDialog" timestamp="1580626019971">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

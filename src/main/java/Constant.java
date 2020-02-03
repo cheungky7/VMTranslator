@@ -1,5 +1,3 @@
-package com.test.VMtranslator;
-
 public class Constant {
     public static final int SP=0;
     public static final int LCL=1;

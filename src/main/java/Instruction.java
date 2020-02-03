@@ -1,5 +1,3 @@
-package com.test.VMtranslator;
-
 enum  COMMAND_TYPE {
     C_ARITHMETIC,
     C_PUSH,

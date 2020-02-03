@@ -1,5 +1,3 @@
-package com.test.VMtranslator;
-import com.test.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -29,18 +27,18 @@ public class CodeWriter {
         // write comment of the parsered
         m_writer.write("//"+instr.getCmd()+" "+instr.getArg1()+" "+instr.getArg2()+"\n");
 
-        if(instr.getCommandType()==COMMAND_TYPE.C_ARITHMETIC){
+        if(instr.getCommandType()== COMMAND_TYPE.C_ARITHMETIC){
             writeArithmetic(instr);
-        }else if(instr.getCommandType()==COMMAND_TYPE.C_PUSH){
+        }else if(instr.getCommandType()== COMMAND_TYPE.C_PUSH){
             WritePush(instr);
-        } else if(instr.getCommandType()==COMMAND_TYPE.C_POP) {
+        } else if(instr.getCommandType()== COMMAND_TYPE.C_POP) {
             WritePop(instr);
         }
 
     }
 
     public void InitMemorySegement() throws IOException {
-        m_writer.write("@"+Constant.SP_BASE_ADDR+"\n");
+        m_writer.write("@"+ Constant.SP_BASE_ADDR+"\n");
         m_writer.write("D=A\n");
         m_writer.write("@"+Constant.SP+"\n");
         m_writer.write("M=D\n");

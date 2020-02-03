@@ -1,5 +1,3 @@
-package com.test.VMtranslator;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -75,7 +73,7 @@ public class Parser {
                 arg2 =Integer.parseInt( tokens[2]);
             }
 
-            m_parsed_instr=new  Instruction(Cmd,arg1,arg2);
+            m_parsed_instr=new Instruction(Cmd,arg1,arg2);
 
             break;
         }
