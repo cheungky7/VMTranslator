@@ -282,17 +282,17 @@ public class CodeWriter {
                 m_writer.write("M=M+1\n");
             }
         }else if(instr.getArg1().equals("temp")){
-            int index=instr.getArg2();
-            m_writer.write("@"+Constant.TEMP_BASE_ADDR+"\n");
-            m_writer.write("D=M\n"); // put the address stored in THAT into D
-            m_writer.write("@"+index+"\n");
-            m_writer.write("A=A+D\n");
+            int index=instr.getArg2()+Constant.TEMP_BASE_ADDR;
+            m_writer.write("@" + index + "\n");
             m_writer.write("D=M\n");
+            // m_writer.write("@SP\n");
             m_writer.write("@"+Constant.SP+"\n");
             m_writer.write("A=M\n");
             m_writer.write("M=D\n");
+            //m_writer.write("@SP\n");
             m_writer.write("@"+Constant.SP+"\n");
             m_writer.write("M=M+1\n");
+
         }
         
     }
@@ -394,7 +394,25 @@ public class CodeWriter {
             m_writer.write("A=M\n");
             m_writer.write("M=D\n"); //put D into the calculated address
 
-        }else if(instr.getArg1().equals("pointer")){
+        }else if(instr.getArg1().equals("argument")) {
+            m_writer.write("@"+instr.getArg2()+"\n");
+            m_writer.write("D=A\n");
+            m_writer.write("@"+Constant.ARG+"\n");
+            m_writer.write("D=D+M\n");
+            //m_writer.write("@R13\n");
+            m_writer.write("@"+Constant.R13+"\n");
+            m_writer.write("M=D\n"); //put the calculated address into R13
+            m_writer.write("@"+Constant.SP+"\n");
+            m_writer.write("M=M-1\n");
+            m_writer.write("A=M\n");
+            m_writer.write("D=M\n"); //put variable from stack to D
+            // m_writer.write("@R13\n");
+            m_writer.write("@"+Constant.R13+"\n");
+            m_writer.write("A=M\n");
+            m_writer.write("M=D\n"); //put D into the calculated address
+
+
+        } else if(instr.getArg1().equals("pointer")){
 
             if(instr.getArg2()==0){
 
