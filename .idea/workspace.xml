@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d8ced10b-2854-4cea-9f36-a556547f0dba" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/VMtranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/VMTranslator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/VMtranslator/CodeWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CodeWriter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/VMtranslator/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Constant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/VMtranslator/Instruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instruction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/VMtranslator/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CodeWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CodeWriter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +58,7 @@
     <configuration name="VMTranslator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="VMTranslator" />
       <module name="VMTranslator.main" />
-      <option name="PROGRAM_PARAMETERS" value="StaticTest.vm" />
+      <option name="PROGRAM_PARAMETERS" value="BasicTest.vm" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value=".*" />
@@ -141,11 +137,11 @@
     <option name="LAST_COMMIT_MESSAGE" value="Add push static command" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="193" y="29" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1580702049559">
+    <state x="193" y="29" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1580719292737">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="137" y="20" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1580621347124" />
-    <state x="193" y="29" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580702049559" />
+    <state x="193" y="29" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580719292737" />
     <state x="662" y="319" width="424" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1580714309297">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -175,46 +171,46 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="401" y="85" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1579017172798" />
-    <state width="938" height="168" key="GridCell.Tab.0.bottom" timestamp="1580705394946">
+    <state width="913" height="119" key="GridCell.Tab.0.bottom" timestamp="1580719302836">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="643" height="242" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1580643007258" />
-    <state width="938" height="168" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1580705394946" />
-    <state width="938" height="168" key="GridCell.Tab.0.center" timestamp="1580705394946">
+    <state width="913" height="119" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1580719302836" />
+    <state width="913" height="119" key="GridCell.Tab.0.center" timestamp="1580719302836">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="643" height="242" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1580643007258" />
-    <state width="938" height="168" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1580705394946" />
-    <state width="938" height="168" key="GridCell.Tab.0.left" timestamp="1580705394946">
+    <state width="913" height="119" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1580719302836" />
+    <state width="913" height="119" key="GridCell.Tab.0.left" timestamp="1580719302836">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="643" height="242" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1580643007258" />
-    <state width="938" height="168" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1580705394946" />
-    <state width="938" height="168" key="GridCell.Tab.0.right" timestamp="1580705394946">
+    <state width="913" height="119" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1580719302836" />
+    <state width="913" height="119" key="GridCell.Tab.0.right" timestamp="1580719302836">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="643" height="242" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1580643007258" />
-    <state width="938" height="168" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1580705394946" />
-    <state width="938" height="168" key="GridCell.Tab.1.bottom" timestamp="1580705394837">
+    <state width="913" height="119" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1580719302836" />
+    <state width="913" height="119" key="GridCell.Tab.1.bottom" timestamp="1580719302837">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="643" height="242" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1580643007258" />
-    <state width="938" height="168" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1580705394837" />
-    <state width="938" height="168" key="GridCell.Tab.1.center" timestamp="1580705394837">
+    <state width="913" height="119" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1580719302837" />
+    <state width="913" height="119" key="GridCell.Tab.1.center" timestamp="1580719302837">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="643" height="242" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1580643007258" />
-    <state width="938" height="168" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1580705394837" />
-    <state width="938" height="168" key="GridCell.Tab.1.left" timestamp="1580705394836">
+    <state width="913" height="119" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1580719302837" />
+    <state width="913" height="119" key="GridCell.Tab.1.left" timestamp="1580719302837">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="643" height="242" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1580643007258" />
-    <state width="938" height="168" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1580705394836" />
-    <state width="938" height="168" key="GridCell.Tab.1.right" timestamp="1580705394837">
+    <state width="913" height="119" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1580719302837" />
+    <state width="913" height="119" key="GridCell.Tab.1.right" timestamp="1580719302837">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="643" height="242" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1580643007258" />
-    <state width="938" height="168" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1580705394837" />
+    <state width="913" height="119" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1580719302837" />
     <state x="382" y="75" key="RollbackChangesDialog" timestamp="1580107709500">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -227,11 +223,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="485" y="142" key="chooseDestDirectoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1578928422803" />
-    <state x="520" y="269" key="com.intellij.ide.util.TipDialog" timestamp="1580691134425">
+    <state x="520" y="269" key="com.intellij.ide.util.TipDialog" timestamp="1580716639434">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="370" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1580617585889" />
-    <state x="520" y="269" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580691134425" />
+    <state x="520" y="269" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580716639434" />
     <state x="478" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1579530732032">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -251,5 +247,10 @@
         <watch expression="instrRemoveComment.length()" language="JAVA" />
       </configuration>
     </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/VMTranslator$VMTranslator.ic" NAME="VMTranslator Coverage Results" MODIFIED="1580719302191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>.*</FILTER>
+    </SUITE>
   </component>
 </project>
