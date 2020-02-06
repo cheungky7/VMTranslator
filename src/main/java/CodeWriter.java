@@ -9,14 +9,24 @@ public class CodeWriter {
     private int eqCmdCounter;
     private int gtCmdCounter;
     private int ltCmdCounter;
+    private String m_FuncName;
 
 
     public CodeWriter(String fileName) throws IOException {
-        m_fileName=fileName;
+        m_fileName= fileName+".asm";
+        setFuncName(fileName);
         m_writer= new BufferedWriter(new FileWriter(m_fileName, false));
         eqCmdCounter=0;
         gtCmdCounter=0;
         ltCmdCounter=0;
+    }
+
+    public void setFuncName(String funcName){
+        m_FuncName=funcName;
+    }
+
+    public String getFuncName(){
+        return m_FuncName;
     }
 
     public void close() throws IOException {
@@ -33,6 +43,12 @@ public class CodeWriter {
             WritePush(instr);
         } else if(instr.getCommandType()== COMMAND_TYPE.C_POP) {
             WritePop(instr);
+        } else if(instr.getCommandType()==COMMAND_TYPE.C_LABEL) {
+            WriteLabel(instr);
+        } else if(instr.getCommandType()==COMMAND_TYPE.C_GOTO) {
+            WriteGoto(instr);
+        } else if(instr.getCommandType()==COMMAND_TYPE.C_IF) {
+            WriteIfGoTo(instr);
         }
 
     }
@@ -444,5 +460,25 @@ public class CodeWriter {
         }
 
     }
+
+    public void WriteLabel(Instruction instr) throws IOException {
+        m_writer.write("(" + this.getFuncName()+"$"+instr.getArg1() + ")\n");
+    }
+
+    public void WriteGoto(Instruction instr) throws IOException {
+        m_writer.write("@" + instr.getArg1() + "\n");
+        m_writer.write("0;JMP\n");
+    }
+
+    public void WriteIfGoTo(Instruction instr) throws IOException {
+        m_writer.write("@" + Constant.SP + "\n");
+        m_writer.write("AM=M-1\n"); //Move stack up by 1
+        m_writer.write("D=M\n");
+        m_writer.write("@" + this.getFuncName()+"$"+instr.getArg1()  + "\n");
+        m_writer.write("D;JNE\n");
+
+    }
+
+
 
 }

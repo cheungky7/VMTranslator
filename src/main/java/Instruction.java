@@ -28,6 +28,18 @@ public class Instruction {
             return COMMAND_TYPE.C_POP;
         }
 
+        if(cmStr.equals("label")){
+            return COMMAND_TYPE.C_LABEL;
+        }
+
+        if(cmStr.equals("goto")){
+            return COMMAND_TYPE.C_GOTO;
+        }
+
+        if(cmStr.equals("if-goto")){
+            return COMMAND_TYPE.C_IF;
+        }
+
         if(cmStr.equals("add") || cmStr.equals("sub") || cmStr.equals("eq")|| cmStr.equals("or")
         || cmStr.equals("and") || cmStr.equals("neg")|| cmStr.equals("not") ||  cmStr.equals("lt")
         ||  cmStr.equals("gt")){

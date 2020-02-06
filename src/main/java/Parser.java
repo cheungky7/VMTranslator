@@ -23,23 +23,9 @@ public class Parser {
         m_haveMoreCmd=true;
     }
 
-
-/*
-    private void clearInternalPara(){
-        //m_Arg1=null;
-        //m_Arg2=0;
-        //m_CmdType=COMMAND_TYPE.C_INVALID;
-
-    }
- */
-
     public void advance() throws IOException{
 
         while(true) {
-           // String commandType=null;
-           // String arg1=null;
-           // String arg2=null;
-            //COMMAND_TYPE CmdType=COMMAND_TYPE.C_NULL;
             String Cmd=null;
             String arg1=null;
             int arg2=0;
