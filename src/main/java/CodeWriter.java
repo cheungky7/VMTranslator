@@ -14,7 +14,8 @@ public class CodeWriter {
 
     public CodeWriter(String fileName) throws IOException {
         m_fileName= fileName+".asm";
-        setFuncName(fileName);
+        //setFuncName(fileName);
+        m_FuncName=null;
         m_writer= new BufferedWriter(new FileWriter(m_fileName, false));
         eqCmdCounter=0;
         gtCmdCounter=0;
