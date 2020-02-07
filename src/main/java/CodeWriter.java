@@ -466,7 +466,7 @@ public class CodeWriter {
     }
 
     public void WriteGoto(Instruction instr) throws IOException {
-        m_writer.write("@" + instr.getArg1() + "\n");
+        m_writer.write("@" + this.getFuncName()+"$"+instr.getArg1() + "\n");
         m_writer.write("0;JMP\n");
     }
 
