@@ -513,7 +513,16 @@ public class CodeWriter {
         m_writer.write("@"+TempAddrHoldRET+"\n");
         m_writer.write("M=D\n"); //put value of ret into Temp variable
        //  *ARG = pop() // Reposition the return value for the caller
-        WritePop(new Instruction("pop","arg",0));
+        //below code equal to WritePop(new Instruction("pop","argument",0));
+        m_writer.write("@"+Constant.SP+"\n");
+        m_writer.write("M=M-1\n");
+        m_writer.write("A=M\n");
+        m_writer.write("D=M\n");
+        m_writer.write("@"+Constant.ARG+"\n");
+        m_writer.write("A=M\n");
+        m_writer.write("M=D\n");
+
+
         //  SP = ARG+1 // Restore SP of the caller
         m_writer.write("@"+Constant.ARG+"\n");
         m_writer.write("D=M+1\n");
