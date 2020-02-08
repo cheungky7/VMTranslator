@@ -4,6 +4,7 @@ import java.io.IOException;
 
 public class CodeWriter {
 
+    private String m_outfileName;
     private String m_fileName;
     private BufferedWriter m_writer;
     private int eqCmdCounter;
@@ -13,10 +14,11 @@ public class CodeWriter {
 
 
     public CodeWriter(String fileName) throws IOException {
-        m_fileName= fileName+".asm";
+        m_outfileName= fileName+".asm";
+        m_fileName=fileName;
         //setFuncName(fileName);
         m_FuncName=null;
-        m_writer= new BufferedWriter(new FileWriter(m_fileName, false));
+        m_writer= new BufferedWriter(new FileWriter(m_outfileName, false));
         eqCmdCounter=0;
         gtCmdCounter=0;
         ltCmdCounter=0;
@@ -50,6 +52,10 @@ public class CodeWriter {
             WriteGoto(instr);
         } else if(instr.getCommandType()==COMMAND_TYPE.C_IF) {
             WriteIfGoTo(instr);
+        } else if(instr.getCommandType()==COMMAND_TYPE.C_FUNCTION){
+            WriteFunction(instr);
+        } else if (instr.getCommandType()==COMMAND_TYPE.C_RETURN){
+            WriteReturn(instr);
         }
 
     }
@@ -477,6 +483,75 @@ public class CodeWriter {
         m_writer.write("D=M\n");
         m_writer.write("@" + this.getFuncName()+"$"+instr.getArg1()  + "\n");
         m_writer.write("D;JNE\n");
+
+    }
+
+    public void WriteFunction(Instruction instr) throws IOException {
+        int numLocals=instr.getArg2();
+        this.setFuncName(instr.getArg1());
+        m_writer.write("("+instr.getArg1()+")\n");
+        for(int i=0;i<numLocals;i++){
+            WritePush(new Instruction("push","constant",0));
+        }
+
+    }
+
+    public void WriteReturn(Instruction instr) throws IOException {
+
+        int TempAddrHoldFrame=Constant.R13;
+        int TempAddrHoldRET=Constant.R14+1;
+        //  FRAME = LCL // FRAME is a temporary variable
+        m_writer.write("@"+Constant.LCL+"\n");
+        m_writer.write("D=M\n");
+        m_writer.write("@"+TempAddrHoldFrame+"\n");
+        m_writer.write("M=D\n"); // put the LCL into Temp base addr frame=LCL
+        // RET = *(FRAME-5) // Put the return-address in a temp. var.
+        m_writer.write("@5\n");
+        m_writer.write("D=D-A\n"); // Calculate address holding ret by LCL -5
+        m_writer.write("A=D\n");
+        m_writer.write("D=M\n"); //put value of ret into D
+        m_writer.write("@"+TempAddrHoldRET+"\n");
+        m_writer.write("M=D\n"); //put value of ret into Temp variable
+       //  *ARG = pop() // Reposition the return value for the caller
+        WritePop(new Instruction("pop","arg",0));
+        //  SP = ARG+1 // Restore SP of the caller
+        m_writer.write("@"+Constant.ARG+"\n");
+        m_writer.write("D=M+1\n");
+        m_writer.write("@"+Constant.SP+"\n");
+        m_writer.write("M=D\n");//restore  stack pointer and SP=ARG+1
+        //THAT = *(FRAME-1) // Restore THAT of the caller
+        m_writer.write("@"+TempAddrHoldFrame+"\n");
+        m_writer.write("D=M\n");
+        m_writer.write("@1\n");
+        m_writer.write("D=D-A\n");
+        m_writer.write("@"+Constant.THAT+"\n");
+        m_writer.write("M=D\n");
+        // THIS = *(FRAME-2) // Restore THIS of the caller
+        m_writer.write("@"+TempAddrHoldFrame+"\n");
+        m_writer.write("D=M\n");
+        m_writer.write("@2\n");
+        m_writer.write("D=D-A\n");
+        m_writer.write("@"+Constant.THIS+"\n");
+        m_writer.write("M=D\n");
+        // ARG = *(FRAME-3) // Restore ARG of the caller
+        m_writer.write("@"+TempAddrHoldFrame+"\n");
+        m_writer.write("D=M\n");
+        m_writer.write("@3\n");
+        m_writer.write("D=D-A\n");
+        m_writer.write("@"+Constant.ARG+"\n");
+        m_writer.write("M=D\n");
+        //LCL = *(FRAME-4) // Restore LCL of the caller
+        m_writer.write("@"+TempAddrHoldFrame+"\n");
+        m_writer.write("D=M\n");
+        m_writer.write("@4\n");
+        m_writer.write("D=D-A\n");
+        m_writer.write("@"+Constant.LCL+"\n");
+        m_writer.write("M=D\n");
+       //  goto RET
+        // Goto return-address 
+        m_writer.write("@"+TempAddrHoldRET+"\n");
+        m_writer.write("A=M\n");
+        m_writer.write("0,JMP\n");
 
     }
 

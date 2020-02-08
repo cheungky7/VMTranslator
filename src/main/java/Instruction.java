@@ -40,6 +40,14 @@ public class Instruction {
             return COMMAND_TYPE.C_IF;
         }
 
+        if(cmStr.equals("function")){
+            return COMMAND_TYPE.C_FUNCTION;
+        }
+
+        if(cmStr.equals("return")) {
+            return COMMAND_TYPE.C_RETURN;
+        }
+
         if(cmStr.equals("add") || cmStr.equals("sub") || cmStr.equals("eq")|| cmStr.equals("or")
         || cmStr.equals("and") || cmStr.equals("neg")|| cmStr.equals("not") ||  cmStr.equals("lt")
         ||  cmStr.equals("gt")){
