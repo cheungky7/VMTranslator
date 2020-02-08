@@ -524,6 +524,8 @@ public class CodeWriter {
         m_writer.write("D=M\n");
         m_writer.write("@1\n");
         m_writer.write("D=D-A\n");
+        m_writer.write("A=D\n");
+        m_writer.write("D=M\n");
         m_writer.write("@"+Constant.THAT+"\n");
         m_writer.write("M=D\n");
         // THIS = *(FRAME-2) // Restore THIS of the caller
@@ -531,6 +533,8 @@ public class CodeWriter {
         m_writer.write("D=M\n");
         m_writer.write("@2\n");
         m_writer.write("D=D-A\n");
+        m_writer.write("A=D\n");
+        m_writer.write("D=M\n");
         m_writer.write("@"+Constant.THIS+"\n");
         m_writer.write("M=D\n");
         // ARG = *(FRAME-3) // Restore ARG of the caller
@@ -538,6 +542,8 @@ public class CodeWriter {
         m_writer.write("D=M\n");
         m_writer.write("@3\n");
         m_writer.write("D=D-A\n");
+        m_writer.write("A=D\n");
+        m_writer.write("D=M\n");
         m_writer.write("@"+Constant.ARG+"\n");
         m_writer.write("M=D\n");
         //LCL = *(FRAME-4) // Restore LCL of the caller
@@ -545,10 +551,12 @@ public class CodeWriter {
         m_writer.write("D=M\n");
         m_writer.write("@4\n");
         m_writer.write("D=D-A\n");
+        m_writer.write("A=D\n");
+        m_writer.write("D=M\n");
         m_writer.write("@"+Constant.LCL+"\n");
         m_writer.write("M=D\n");
        //  goto RET
-        // Goto return-address 
+        // Goto return-address
         m_writer.write("@"+TempAddrHoldRET+"\n");
         m_writer.write("A=M\n");
         m_writer.write("0,JMP\n");
