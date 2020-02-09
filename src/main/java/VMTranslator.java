@@ -1,5 +1,6 @@
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -68,6 +69,20 @@ public class VMTranslator {
 
         searchFilesInDir(".*\\.vm", folder,result);
 
+        /*
+        for (String s : result) {
+            System.out.println(s);
+        }*/
+        int indexOfSysVM=0;
+
+        for(int i=0; i<result.size();i++){
+            if(result.get(i).contains("Sys.vm")==true){
+                indexOfSysVM=i;
+                break;
+            }
+        }
+
+        Collections.swap(result, 0, indexOfSysVM);
         for (String s : result) {
             System.out.println(s);
         }
@@ -87,9 +102,6 @@ public class VMTranslator {
         } else {
             generateFromMultiFiles(sourceFileName);
         }
-
-
-
 
     }
 }
