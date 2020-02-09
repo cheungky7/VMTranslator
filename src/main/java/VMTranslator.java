@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -62,6 +63,23 @@ public class VMTranslator {
         }
     }
 
+    public static void writeToASMFile(CodeWriter coder,String sourceFileName,Integer lineNo) throws IOException {
+
+        Parser parser = new Parser(sourceFileName);
+        while(parser.hasMoreCommands()==true){
+            parser.advance();
+            Instruction parsedInstr=parser.getParsedInstr();
+
+            if(parsedInstr !=null){
+                System.out.println("line:"+lineNo+",comand:"+parsedInstr.getCommandType()+",arg1:"
+                        +parsedInstr.getArg1()+",arg2:"+parsedInstr.getArg2());
+                coder.writeAssemblyCode(parsedInstr);
+            }
+            lineNo++;
+        }
+        parser.close();
+    }
+
     public static void generateFromMultiFiles(String path){
 
         List<String> result = new ArrayList<>();
@@ -69,10 +87,7 @@ public class VMTranslator {
 
         searchFilesInDir(".*\\.vm", folder,result);
 
-        /*
-        for (String s : result) {
-            System.out.println(s);
-        }*/
+
         int indexOfSysVM=0;
 
         for(int i=0; i<result.size();i++){
@@ -83,8 +98,17 @@ public class VMTranslator {
         }
 
         Collections.swap(result, 0, indexOfSysVM);
-        for (String s : result) {
-            System.out.println(s);
+        try {
+            Integer lineNo=0;
+            CodeWriter coder = new CodeWriter(path);
+            for (String s : result) {
+                System.out.println("Read: " + s);
+                //writeToASMFile(CodeWriter coder,String sourceFileName,Integer lineNo);
+                writeToASMFile(coder,s,lineNo);
+            }
+        }catch (Exception e){
+            System.out.printf("Exception:%s\n",  e.getMessage());
+            e.printStackTrace();
         }
 
 
