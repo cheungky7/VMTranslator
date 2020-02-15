@@ -11,6 +11,7 @@ public class CodeWriter {
     private int gtCmdCounter;
     private int ltCmdCounter;
     private String m_FuncName;
+    private static int m_labelnum=0;
 
 
     public CodeWriter(String fileName) throws IOException {
@@ -22,6 +23,7 @@ public class CodeWriter {
         eqCmdCounter=0;
         gtCmdCounter=0;
         ltCmdCounter=0;
+        //m_labelnum=0;
     }
 
     public void setFuncName(String funcName){
@@ -56,15 +58,60 @@ public class CodeWriter {
             WriteFunction(instr);
         } else if (instr.getCommandType()==COMMAND_TYPE.C_RETURN){
             WriteReturn(instr);
+        } else if (instr.getCommandType()==COMMAND_TYPE.C_CALL){
+            WriteCall(instr);
         }
 
     }
+
+
 
     public void InitMemorySegement() throws IOException {
         m_writer.write("@"+ Constant.SP_BASE_ADDR+"\n");
         m_writer.write("D=A\n");
         m_writer.write("@"+Constant.SP+"\n");
         m_writer.write("M=D\n");
+    }
+
+    public void WriteCall(Instruction instr) throws IOException {
+       // m_writer.write("@"+Constant.SP+"\n");
+        String ret_label=this.m_fileName+"."+instr.getArg1()+"$ret."+m_labelnum;
+        m_labelnum++;
+        // push return-address
+        m_writer.write("@" + ret_label + "\n");
+        m_writer.write("D=A\n");
+        // m_writer.write("@SP\n");
+        m_writer.write("@"+Constant.SP+"\n");
+        m_writer.write("A=M\n");
+        m_writer.write("M=D\n");
+        //m_writer.write("@SP\n");
+        m_writer.write("@"+Constant.SP+"\n");
+        m_writer.write("M=M+1\n");
+
+        WritePush(new Instruction("push","local",0));
+        WritePush(new Instruction("push","argument",0));
+        WritePush(new Instruction("push","this",0));
+        WritePush(new Instruction("push","that",0));
+        // ARG = SP-n-5
+        m_writer.write("@"+Constant.SP+"\n");
+        m_writer.write("D=M\n");
+        m_writer.write("@"+instr.getArg2()+"\n");
+        m_writer.write("D=D-A\n");
+        m_writer.write("@5\n");
+        m_writer.write("D=D-A\n");
+        m_writer.write("@"+Constant.ARG+"\n");
+        m_writer.write("M=D\n");
+        // LCL = SP
+        m_writer.write("@"+Constant.SP+"\n");
+        m_writer.write("D=M\n");
+        m_writer.write("@"+Constant.LCL+"\n");
+        m_writer.write("M=D\n");
+
+        // goto f
+        m_writer.write("@"+instr.getArg1()+"/n");
+        m_writer.write("0;JMP\n");
+        m_writer.write("("+ret_label+")/n");
+
     }
 
     public void writeArithmetic(Instruction instr) throws IOException {

@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d8ced10b-2854-4cea-9f36-a556547f0dba" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/VMTranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/VMTranslator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CodeWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CodeWriter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,11 +170,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="417" y="126" key="EnvironmentVariablesDialog/0.0.1366.728@0.0.1366.728" timestamp="1578928485404" />
-    <state x="564" y="121" key="FileChooserDialogImpl" timestamp="1581218206121">
+    <state x="564" y="121" key="FileChooserDialogImpl" timestamp="1581781357638">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="401" y="85" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1579017172798" />
-    <state x="564" y="121" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1581218206121" />
+    <state x="564" y="121" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1581781357638" />
     <state width="1152" height="312" key="GridCell.Tab.0.bottom" timestamp="1581221202159">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -227,11 +227,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="485" y="142" key="chooseDestDirectoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1578928422803" />
-    <state x="520" y="269" key="com.intellij.ide.util.TipDialog" timestamp="1581245252293">
+    <state x="520" y="269" key="com.intellij.ide.util.TipDialog" timestamp="1581771840330">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="370" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1580617585889" />
-    <state x="520" y="269" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581245252293" />
+    <state x="520" y="269" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581771840330" />
     <state x="478" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1579530732032">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
