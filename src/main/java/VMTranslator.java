@@ -106,10 +106,15 @@ public class VMTranslator {
                 //writeToASMFile(CodeWriter coder,String sourceFileName,Integer lineNo);
                 writeToASMFile(coder,s,lineNo);
             }
+
+            coder.close();
         }catch (Exception e){
             System.out.printf("Exception:%s\n",  e.getMessage());
             e.printStackTrace();
         }
+
+        //parser.close();
+
 
 
     }

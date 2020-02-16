@@ -12,6 +12,7 @@ public class CodeWriter {
     private int ltCmdCounter;
     private String m_FuncName;
     private static int m_labelnum=0;
+    private FileWriter m_FileWriter;
 
 
     public CodeWriter(String fileName) throws IOException {
@@ -19,7 +20,8 @@ public class CodeWriter {
         m_fileName=fileName;
         //setFuncName(fileName);
         m_FuncName=null;
-        m_writer= new BufferedWriter(new FileWriter(m_outfileName, false));
+        m_FileWriter=new FileWriter(m_outfileName, false);
+        m_writer= new BufferedWriter(m_FileWriter);
         eqCmdCounter=0;
         gtCmdCounter=0;
         ltCmdCounter=0;
