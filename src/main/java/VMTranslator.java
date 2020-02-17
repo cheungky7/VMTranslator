@@ -87,7 +87,7 @@ public class VMTranslator {
 
         searchFilesInDir(".*\\.vm", folder,result);
 
-
+/*
         int indexOfSysVM=0;
 
         for(int i=0; i<result.size();i++){
@@ -98,9 +98,12 @@ public class VMTranslator {
         }
 
         Collections.swap(result, 0, indexOfSysVM);
+        */
+
         try {
             Integer lineNo=0;
             CodeWriter coder = new CodeWriter(path);
+            coder.writeBoostStrapCode();
             for (String s : result) {
                 System.out.println("Read: " + s);
                 //writeToASMFile(CodeWriter coder,String sourceFileName,Integer lineNo);

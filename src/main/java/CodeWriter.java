@@ -66,7 +66,16 @@ public class CodeWriter {
 
     }
 
+    public void writeBoostStrapCode() throws IOException {
+        // Initialize the stack pointer to 0x0100
+        m_writer.write("@"+ Constant.SP_BASE_ADDR+"\n");
+        m_writer.write("D=A\n");
+        m_writer.write("@"+Constant.SP+"\n");
+        m_writer.write("M=D\n");
+        // Start executing (the translated code of) Sys.init
+        WriteCall(new Instruction("call","Sys.init",0) );
 
+    }
 
     public void InitMemorySegement() throws IOException {
         m_writer.write("@"+ Constant.SP_BASE_ADDR+"\n");
@@ -110,9 +119,9 @@ public class CodeWriter {
         m_writer.write("M=D\n");
 
         // goto f
-        m_writer.write("@"+instr.getArg1()+"/n");
+        m_writer.write("@"+instr.getArg1()+"\n");
         m_writer.write("0;JMP\n");
-        m_writer.write("("+ret_label+")/n");
+        m_writer.write("("+ret_label+")\n");
 
     }
 
