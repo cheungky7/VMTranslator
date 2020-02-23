@@ -88,7 +88,15 @@ public class CodeWriter {
        // m_writer.write("@"+Constant.SP+"\n");
         String ret_label=this.m_fileName+"."+instr.getArg1()+"$ret."+m_labelnum;
         m_labelnum++;
+        // put sp into R13
+      //  m_writer.write("// put sp into R13\n");
+      //  m_writer.write("@" + Constant.SP + "\n");
+      //  m_writer.write("D=M\n");
+      //  m_writer.write("@" + Constant.R13 + "\n");
+      //  m_writer.write("M=D\n");
+
         // push return-address
+        m_writer.write("// push return-address\n");
         m_writer.write("@" + ret_label + "\n");
         m_writer.write("D=A\n");
         // m_writer.write("@SP\n");
@@ -98,12 +106,16 @@ public class CodeWriter {
         //m_writer.write("@SP\n");
         m_writer.write("@"+Constant.SP+"\n");
         m_writer.write("M=M+1\n");
-
+        m_writer.write("//push local\n");
         WritePush(new Instruction("push","local",0));
+        m_writer.write("//push argument\n");
         WritePush(new Instruction("push","argument",0));
+        m_writer.write("//push this\n");
         WritePush(new Instruction("push","this",0));
+        m_writer.write("//push that\n");
         WritePush(new Instruction("push","that",0));
-        // ARG = SP-n-5
+        // ARG = sp-n-5
+        m_writer.write("// ARG = sp-n-5\n");
         m_writer.write("@"+Constant.SP+"\n");
         m_writer.write("D=M\n");
         m_writer.write("@"+instr.getArg2()+"\n");
@@ -113,12 +125,14 @@ public class CodeWriter {
         m_writer.write("@"+Constant.ARG+"\n");
         m_writer.write("M=D\n");
         // LCL = SP
+        m_writer.write("// LCL = SP\n");
         m_writer.write("@"+Constant.SP+"\n");
         m_writer.write("D=M\n");
         m_writer.write("@"+Constant.LCL+"\n");
         m_writer.write("M=D\n");
 
         // goto f
+        m_writer.write("// goto f\n");
         m_writer.write("@"+instr.getArg1()+"\n");
         m_writer.write("0;JMP\n");
         m_writer.write("("+ret_label+")\n");
