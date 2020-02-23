@@ -404,7 +404,7 @@ public class CodeWriter {
         @END
         0;JMP
          */
-        writeASMLineWithComment("(END)");
+        m_writer.write("(END)\n");
         writeASMLineWithComment("@END");
         writeASMLineWithComment("0;JMP");
 
