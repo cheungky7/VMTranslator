@@ -133,7 +133,7 @@ public class CodeWriter {
         writeASMLineWithComment("@"+Constant.ARG);
         writeASMLineWithComment("M=D");
         // LCL = SP
-        m_writer.write("// LCL = SP");
+        m_writer.write("// LCL = SP\n");
         writeASMLineWithComment("@"+Constant.SP);
         writeASMLineWithComment("D=M");
         writeASMLineWithComment("@"+Constant.LCL);
@@ -143,7 +143,7 @@ public class CodeWriter {
         m_writer.write("// goto f\n");
         writeASMLineWithComment("@"+instr.getArg1());
         writeASMLineWithComment("0;JMP");
-        m_writer.write("("+ret_label+")");
+        m_writer.write("("+ret_label+")\n");
 
     }
 
