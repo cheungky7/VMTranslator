@@ -13,6 +13,13 @@ public class CodeWriter {
     private String m_FuncName;
     private static int m_labelnum=0;
     private FileWriter m_FileWriter;
+    private static int m_lineInMEM=0;
+
+    private void writeASMLineWithComment(String line) throws IOException {
+       String lineWithComment=line+" //"+m_lineInMEM+"\n";
+        m_writer.write(lineWithComment);
+        m_lineInMEM++;
+    }
 
 
     public CodeWriter(String fileName) throws IOException {
@@ -38,6 +45,7 @@ public class CodeWriter {
 
     public void close() throws IOException {
         m_writer.close();
+
     }
 
     public void writeAssemblyCode(Instruction instr) throws IOException {
@@ -68,20 +76,20 @@ public class CodeWriter {
 
     public void writeBoostStrapCode() throws IOException {
         // Initialize the stack pointer to 0x0100
-        m_writer.write("@"+ Constant.SP_BASE_ADDR+"\n");
-        m_writer.write("D=A\n");
-        m_writer.write("@"+Constant.SP+"\n");
-        m_writer.write("M=D\n");
+        writeASMLineWithComment("@"+ Constant.SP_BASE_ADDR);
+        writeASMLineWithComment("D=A");
+        writeASMLineWithComment("@"+Constant.SP+"");
+        writeASMLineWithComment("M=D");
         // Start executing (the translated code of) Sys.init
         WriteCall(new Instruction("call","Sys.init",0) );
 
     }
 
     public void InitMemorySegement() throws IOException {
-        m_writer.write("@"+ Constant.SP_BASE_ADDR+"\n");
-        m_writer.write("D=A\n");
-        m_writer.write("@"+Constant.SP+"\n");
-        m_writer.write("M=D\n");
+        writeASMLineWithComment("@"+ Constant.SP_BASE_ADDR);
+        writeASMLineWithComment("D=A");
+        writeASMLineWithComment("@"+Constant.SP);
+        writeASMLineWithComment("M=D");
     }
 
     public void WriteCall(Instruction instr) throws IOException {
@@ -97,15 +105,15 @@ public class CodeWriter {
 
         // push return-address
         m_writer.write("// push return-address\n");
-        m_writer.write("@" + ret_label + "\n");
-        m_writer.write("D=A\n");
+        writeASMLineWithComment("@" + ret_label );
+        writeASMLineWithComment("D=A");
         // m_writer.write("@SP\n");
-        m_writer.write("@"+Constant.SP+"\n");
-        m_writer.write("A=M\n");
-        m_writer.write("M=D\n");
-        //m_writer.write("@SP\n");
-        m_writer.write("@"+Constant.SP+"\n");
-        m_writer.write("M=M+1\n");
+        writeASMLineWithComment("@"+Constant.SP);
+        writeASMLineWithComment("A=M");
+        writeASMLineWithComment("M=D");
+        //m_writer.write("@SP");
+        writeASMLineWithComment("@"+Constant.SP);
+        writeASMLineWithComment("M=M+1");
         m_writer.write("//push local\n");
         WritePush(new Instruction("push","local",0));
         m_writer.write("//push argument\n");
@@ -116,164 +124,164 @@ public class CodeWriter {
         WritePush(new Instruction("push","that",0));
         // ARG = sp-n-5
         m_writer.write("// ARG = sp-n-5\n");
-        m_writer.write("@"+Constant.SP+"\n");
-        m_writer.write("D=M\n");
-        m_writer.write("@"+instr.getArg2()+"\n");
-        m_writer.write("D=D-A\n");
-        m_writer.write("@5\n");
-        m_writer.write("D=D-A\n");
-        m_writer.write("@"+Constant.ARG+"\n");
-        m_writer.write("M=D\n");
+        writeASMLineWithComment("@"+Constant.SP);
+        writeASMLineWithComment("D=M");
+        writeASMLineWithComment("@"+instr.getArg2());
+        writeASMLineWithComment("D=D-A");
+        writeASMLineWithComment("@5");
+        writeASMLineWithComment("D=D-A");
+        writeASMLineWithComment("@"+Constant.ARG);
+        writeASMLineWithComment("M=D");
         // LCL = SP
-        m_writer.write("// LCL = SP\n");
-        m_writer.write("@"+Constant.SP+"\n");
-        m_writer.write("D=M\n");
-        m_writer.write("@"+Constant.LCL+"\n");
-        m_writer.write("M=D\n");
+        m_writer.write("// LCL = SP");
+        writeASMLineWithComment("@"+Constant.SP);
+        writeASMLineWithComment("D=M");
+        writeASMLineWithComment("@"+Constant.LCL);
+        writeASMLineWithComment("M=D");
 
         // goto f
         m_writer.write("// goto f\n");
-        m_writer.write("@"+instr.getArg1()+"\n");
-        m_writer.write("0;JMP\n");
-        m_writer.write("("+ret_label+")\n");
+        writeASMLineWithComment("@"+instr.getArg1());
+        writeASMLineWithComment("0;JMP");
+        m_writer.write("("+ret_label+")");
 
     }
 
     public void writeArithmetic(Instruction instr) throws IOException {
         if(instr.getCmd().equals("add")){
 
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n"); // decrease the stack pointer first
-            m_writer.write("A=M\n");
-            m_writer.write("D=M\n");//put the 2nd variable in D
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n");
-            m_writer.write("A=M\n");   // M is now point to 1 st variable
-            m_writer.write("M=D+M\n"); // add 1st variable from 2nd variable
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M+1\n"); // increase the stack pointer
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M-1"); // decrease the stack pointer first
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("D=M");//put the 2nd variable in D
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M-1");
+            writeASMLineWithComment("A=M");   // M is now point to 1 st variable
+            writeASMLineWithComment("M=D+M"); // add 1st variable from 2nd variable
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M+1"); // increase the stack pointer
 
         } else if (instr.getCmd().equals("eq")){
-            
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n"); // decrease the stack pointer first
+
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M-1"); // decrease the stack pointer first
             //m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("A=M\n");
-            m_writer.write("D=M\n");//put the 2nd variable in D
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n");
-            m_writer.write("A=M\n");   // M is now point to 1 st variable
-            m_writer.write("D=M-D\n"); // substract 1st variable from 2nd variable
-            m_writer.write("M=-1\n"); // if two variable is equal put -1 into 1 st variable
-            m_writer.write("@EQ_LABEL"+this.eqCmdCounter+"\n");
-            m_writer.write("D,JEQ\n");
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("A=M\n");
-            m_writer.write("M=0\n");
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("D=M");//put the 2nd variable in D
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M-1");
+            writeASMLineWithComment("A=M");   // M is now point to 1 st variable
+            writeASMLineWithComment("D=M-D"); // substract 1st variable from 2nd variable
+            writeASMLineWithComment("M=-1"); // if two variable is equal put -1 into 1 st variable
+            writeASMLineWithComment("@EQ_LABEL"+this.eqCmdCounter);
+            writeASMLineWithComment("D,JEQ");
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("M=0");
             m_writer.write("(EQ_LABEL"+this.eqCmdCounter+")\n");
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M+1\n");
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M+1");
             this.eqCmdCounter++;
 
         } else if(instr.getCmd().equals("gt")) {
 
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n"); // decrease the stack pointer first
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M-1"); // decrease the stack pointer first
             //m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("A=M\n");
-            m_writer.write("D=M\n");//put the 2nd variable in D
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n");
-            m_writer.write("A=M\n");   // M is now point to 1 st variable
-            m_writer.write("D=M-D\n"); // substract 1st variable from 2nd variable
-            m_writer.write("M=-1\n"); // if two variable is equal put -1 into 1 st variable
-            m_writer.write("@GT_LABEL"+this.gtCmdCounter+"\n");
-            m_writer.write("D,JGT\n");
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("A=M\n");
-            m_writer.write("M=0\n");
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("D=M");//put the 2nd variable in D
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M-1");
+            writeASMLineWithComment("A=M");   // M is now point to 1 st variable
+            writeASMLineWithComment("D=M-D"); // substract 1st variable from 2nd variable
+            writeASMLineWithComment("M=-1"); // if two variable is equal put -1 into 1 st variable
+            writeASMLineWithComment("@GT_LABEL"+this.gtCmdCounter);
+            writeASMLineWithComment("D,JGT");
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("M=0");
             m_writer.write("(GT_LABEL"+this.gtCmdCounter+")\n");
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M+1\n");
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M+1");
             gtCmdCounter++;
 
         }else if(instr.getCmd().equals("lt")) {
 
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n"); // decrease the stack pointer first
-            m_writer.write("A=M\n");
-            m_writer.write("D=M\n");//put the 2nd variable in D
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n");
-            m_writer.write("A=M\n");   // M is now point to 1 st variable
-            m_writer.write("D=M-D\n"); // substract 1st variable from 2nd variable
-            m_writer.write("M=-1\n"); // if two variable is equal put -1 into 1 st variable
-            m_writer.write("@LT_LABEL"+this.ltCmdCounter+"\n");
-            m_writer.write("D,JLT\n");
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("A=M\n");
-            m_writer.write("M=0\n");
-            m_writer.write("(LT_LABEL"+this.ltCmdCounter+")\n");
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M+1\n");
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M-1"); // decrease the stack pointer first
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("D=M");//put the 2nd variable in D
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M-1");
+            writeASMLineWithComment("A=M");   // M is now point to 1 st variable
+            writeASMLineWithComment("D=M-D"); // substract 1st variable from 2nd variable
+            writeASMLineWithComment("M=-1"); // if two variable is equal put -1 into 1 st variable
+            writeASMLineWithComment("@LT_LABEL"+this.ltCmdCounter);
+            writeASMLineWithComment("D,JLT");
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("M=0");
+            m_writer.write("(LT_LABEL"+this.ltCmdCounter+")");
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M+1");
             ltCmdCounter++;
 
         }else if(instr.getCmd().equals("sub")){
 
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n"); // decrease the stack pointer first
-            m_writer.write("A=M\n");
-            m_writer.write("D=M\n");//put the 2nd variable in D
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n");
-            m_writer.write("A=M\n");   // M is now point to 1 st variable
-            m_writer.write("M=M-D\n"); // substract 1st variable from 2nd variable
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M+1\n");
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M-1"); // decrease the stack pointer first
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("D=M");//put the 2nd variable in D
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M-1");
+            writeASMLineWithComment("A=M");   // M is now point to 1 st variable
+            writeASMLineWithComment("M=M-D"); // substract 1st variable from 2nd variable
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M+1");
 
         }else if(instr.getCmd().equals("or")){
 
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n"); // decrease the stack pointer first
-            m_writer.write("A=M\n");
-            m_writer.write("D=M\n");//put the 2nd variable in D
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n");
-            m_writer.write("A=M\n");   // M is now point to 1 st variable
-            m_writer.write("M=D|M\n"); // substract 1st variable from 2nd variable
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M+1\n");
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M-1"); // decrease the stack pointer first
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("D=M");//put the 2nd variable in D
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M-1");
+            writeASMLineWithComment("A=M");   // M is now point to 1 st variable
+            writeASMLineWithComment("M=D|M"); // substract 1st variable from 2nd variable
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M+1");
 
         }else if(instr.getCmd().equals("and")){
 
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n"); // decrease the stack pointer first
-            m_writer.write("A=M\n");
-            m_writer.write("D=M\n");//put the 2nd variable in D
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n");
-            m_writer.write("A=M\n");   // M is now point to 1 st variable
-            m_writer.write("M=D&M\n"); // substract 1st variable from 2nd variable
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M+1\n");
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M-1"); // decrease the stack pointer first
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("D=M");//put the 2nd variable in D
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M-1");
+            writeASMLineWithComment("A=M");   // M is now point to 1 st variable
+            writeASMLineWithComment("M=D&M"); // substract 1st variable from 2nd variable
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M+1");
 
         } else if(instr.getCmd().equals("not")){
 
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n"); // decrease the stack pointer first
-            m_writer.write("A=M\n");   // M is now point to 1 st variable
-            m_writer.write("M=!M\n"); // substract 1st variable from 2nd variable
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M+1\n");
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M-1"); // decrease the stack pointer first
+            writeASMLineWithComment("A=M");   // M is now point to 1 st variable
+            writeASMLineWithComment("M=!M"); // substract 1st variable from 2nd variable
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M+1");
 
         }else if(instr.getCmd().equals("neg")){
 
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n"); // decrease the stack pointer first
-            m_writer.write("A=M\n");   // M is now point to 1 st variable
-            m_writer.write("M=-M\n"); // substract 1st variable from 2nd variable
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M+1\n");
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M-1"); // decrease the stack pointer first
+            writeASMLineWithComment("A=M");   // M is now point to 1 st variable
+            writeASMLineWithComment("M=-M"); // substract 1st variable from 2nd variable
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M+1");
 
         }
 
@@ -281,110 +289,110 @@ public class CodeWriter {
 
     public void WritePush(Instruction instr) throws IOException {
         if(instr.getArg1().equals("constant")) {
-            m_writer.write("@" + instr.getArg2() + "\n");
-            m_writer.write("D=A\n");
-           // m_writer.write("@SP\n");
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("A=M\n");
-            m_writer.write("M=D\n");
+            writeASMLineWithComment("@" + instr.getArg2() );
+            writeASMLineWithComment("D=A");
+           // m_writer.write("@SP");
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("M=D");
             //m_writer.write("@SP\n");
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M+1\n");
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M+1");
         } else if(instr.getArg1().equals("static")) {
             int index=instr.getArg2()+Constant.STATIC_BASE_ADDR;
-            m_writer.write("@" + index + "\n");
-            m_writer.write("D=M\n");
-            // m_writer.write("@SP\n");
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("A=M\n");
-            m_writer.write("M=D\n");
-            //m_writer.write("@SP\n");
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M+1\n");
+            writeASMLineWithComment("@" + index );
+            writeASMLineWithComment("D=M");
+            // writeASMLineWithComment("@SP\n");
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("M=D");
+            //writeASMLineWithComment("@SP\n");
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M+1");
 
         }else if(instr.getArg1().equals("local")){
             int index=instr.getArg2();
-            m_writer.write("@"+Constant.LCL+"\n");
-            m_writer.write("D=M\n"); // put the address stored in THAT into D
-            m_writer.write("@"+index+"\n");
-            m_writer.write("A=A+D\n");
-            m_writer.write("D=M\n");
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("A=M\n");
-            m_writer.write("M=D\n");
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M+1\n");
+            writeASMLineWithComment("@"+Constant.LCL);
+            writeASMLineWithComment("D=M"); // put the address stored in THAT into D
+            writeASMLineWithComment("@"+index);
+            writeASMLineWithComment("A=A+D");
+            writeASMLineWithComment("D=M");
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("M=D");
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M+1");
         }else if(instr.getArg1().equals("argument")){
             int index=instr.getArg2();
-            m_writer.write("@"+Constant.ARG+"\n");
-            m_writer.write("D=M\n"); // put the address stored in THAT into D
-            m_writer.write("@"+index+"\n");
-            m_writer.write("A=A+D\n");
-            m_writer.write("D=M\n");
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("A=M\n");
-            m_writer.write("M=D\n");
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M+1\n");
+            writeASMLineWithComment("@"+Constant.ARG);
+            writeASMLineWithComment("D=M"); // put the address stored in THAT into D
+            writeASMLineWithComment("@"+index);
+            writeASMLineWithComment("A=A+D");
+            writeASMLineWithComment("D=M");
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("M=D");
+            writeASMLineWithComment("@"+Constant.SP+"");
+            writeASMLineWithComment("M=M+1");
         }else if(instr.getArg1().equals("that")){
             int index=instr.getArg2();
-            m_writer.write("@"+Constant.THAT+"\n");
-            m_writer.write("D=M\n"); // put the address stored in THAT into D
-            m_writer.write("@"+index+"\n");
-            m_writer.write("A=A+D\n");
-            m_writer.write("D=M\n");
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("A=M\n");
-            m_writer.write("M=D\n");
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M+1\n");
+            writeASMLineWithComment("@"+Constant.THAT+"");
+            writeASMLineWithComment("D=M"); // put the address stored in THAT into D
+            writeASMLineWithComment("@"+index+"");
+            writeASMLineWithComment("A=A+D");
+            writeASMLineWithComment("D=M");
+            writeASMLineWithComment("@"+Constant.SP+"");
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("M=D");
+            writeASMLineWithComment("@"+Constant.SP+"");
+            writeASMLineWithComment("M=M+1");
 
         }else if(instr.getArg1().equals("this")){
             int index=instr.getArg2();
-            m_writer.write("@"+Constant.THIS+"\n");
-            m_writer.write("D=M\n"); // put the address stored in THAT into D
-            m_writer.write("@"+index+"\n");
-            m_writer.write("A=A+D\n");
-            m_writer.write("D=M\n");
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("A=M\n");
-            m_writer.write("M=D\n");
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M+1\n");
+            writeASMLineWithComment("@"+Constant.THIS+"");
+            writeASMLineWithComment("D=M"); // put the address stored in THAT into D
+            writeASMLineWithComment("@"+index+"");
+            writeASMLineWithComment("A=A+D");
+            writeASMLineWithComment("D=M");
+            writeASMLineWithComment("@"+Constant.SP+"");
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("M=D");
+            writeASMLineWithComment("@"+Constant.SP+"");
+            writeASMLineWithComment("M=M+1");
 
         }else if(instr.getArg1().equals("pointer")){
 
             if(instr.getArg2()==0){
 
-                m_writer.write("@"+Constant.THIS+"\n");
-                m_writer.write("D=M\n");
-                m_writer.write("@"+Constant.SP+"\n");
-                m_writer.write("A=M\n");
-                m_writer.write("M=D\n");
-                m_writer.write("@"+Constant.SP+"\n");
-                m_writer.write("M=M+1\n");
+                writeASMLineWithComment("@"+Constant.THIS+"");
+                writeASMLineWithComment("D=M");
+                writeASMLineWithComment("@"+Constant.SP+"");
+                writeASMLineWithComment("A=M");
+                writeASMLineWithComment("M=D");
+                writeASMLineWithComment("@"+Constant.SP+"");
+                writeASMLineWithComment("M=M+1");
 
             }else if(instr.getArg2()==1) {
 
-                m_writer.write("@" + Constant.THAT + "\n");
-                m_writer.write("D=M\n");
-                m_writer.write("@" + Constant.SP + "\n");
-                m_writer.write("A=M\n");
-                m_writer.write("M=D\n");
-                m_writer.write("@" + Constant.SP + "\n");
-                m_writer.write("M=M+1\n");
+                writeASMLineWithComment("@" + Constant.THAT + "");
+                writeASMLineWithComment("D=M");
+                writeASMLineWithComment("@" + Constant.SP + "");
+                writeASMLineWithComment("A=M");
+                writeASMLineWithComment("M=D");
+                writeASMLineWithComment("@" + Constant.SP + "");
+                writeASMLineWithComment("M=M+1");
             }
         }else if(instr.getArg1().equals("temp")){
             int index=instr.getArg2()+Constant.TEMP_BASE_ADDR;
-            m_writer.write("@" + index + "\n");
-            m_writer.write("D=M\n");
-            // m_writer.write("@SP\n");
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("A=M\n");
-            m_writer.write("M=D\n");
-            //m_writer.write("@SP\n");
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M+1\n");
+            writeASMLineWithComment("@" + index + "");
+            writeASMLineWithComment("D=M");
+            // m_writer.write("@SP");
+            writeASMLineWithComment("@"+Constant.SP+"");
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("M=D");
+            //m_writer.write("@SP");
+            writeASMLineWithComment("@"+Constant.SP+"");
+            writeASMLineWithComment("M=M+1");
 
         }
         
@@ -396,9 +404,9 @@ public class CodeWriter {
         @END
         0;JMP
          */
-        m_writer.write("(END)\n");
-        m_writer.write("@END\n");
-        m_writer.write("0;JMP");
+        writeASMLineWithComment("(END)");
+        writeASMLineWithComment("@END");
+        writeASMLineWithComment("0;JMP");
 
     }
 
@@ -407,130 +415,130 @@ public class CodeWriter {
     public void WritePop(Instruction instr) throws IOException {
         if(instr.getArg1().equals("static")){
             int index=instr.getArg2()+Constant.STATIC_BASE_ADDR;
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n"); // decrease the stack pointer first
-            m_writer.write("A=M\n");
-            m_writer.write("D=M\n");//put the  variable from stack in D
-            m_writer.write("@"+index+"\n");
-            m_writer.write("M=D\n");//put the  variable from D to static location
+            writeASMLineWithComment("@"+Constant.SP+"");
+            writeASMLineWithComment("M=M-1"); // decrease the stack pointer first
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("D=M");//put the  variable from stack in D
+            writeASMLineWithComment("@"+index+"");
+            writeASMLineWithComment("M=D");//put the  variable from D to static location
           //  m_writer.write("@"+Constant.SP+"\n");
           //  m_writer.write("M=M-1\n");
 
         } else if(instr.getArg1().equals("local")){
-            m_writer.write("@"+instr.getArg2()+"\n");
-            m_writer.write("D=A\n");
-            m_writer.write("@"+Constant.LCL+"\n");
-            m_writer.write("D=D+M\n");
+            writeASMLineWithComment("@"+instr.getArg2()+"");
+            writeASMLineWithComment("D=A");
+            writeASMLineWithComment("@"+Constant.LCL+"");
+            writeASMLineWithComment("D=D+M");
             //m_writer.write("@R13\n");
-            m_writer.write("@"+Constant.R13+"\n");
-            m_writer.write("M=D\n"); //put the calculated address into R13
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n");
-            m_writer.write("A=M\n");
-            m_writer.write("D=M\n"); //put variable from stack to D
+            writeASMLineWithComment("@"+Constant.R13+"");
+            writeASMLineWithComment("M=D"); //put the calculated address into R13
+            writeASMLineWithComment("@"+Constant.SP+"");
+            writeASMLineWithComment("M=M-1");
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("D=M"); //put variable from stack to D
         //    m_writer.write("@R13\n");
-            m_writer.write("@"+Constant.R13+"\n");
-            m_writer.write("A=M\n");
-            m_writer.write("M=D\n"); //put D into the calculated address
+            writeASMLineWithComment("@"+Constant.R13+"");
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("M=D"); //put D into the calculated address
 
 
 
         }else if(instr.getArg1().equals("this")){
 
-            m_writer.write("@"+instr.getArg2()+"\n");
-            m_writer.write("D=A\n");
-            m_writer.write("@"+Constant.THIS+"\n");
-            m_writer.write("D=D+M\n");
+            writeASMLineWithComment("@"+instr.getArg2()+"");
+            writeASMLineWithComment("D=A");
+            writeASMLineWithComment("@"+Constant.THIS+"");
+            writeASMLineWithComment("D=D+M");
            // m_writer.write("@R13\n");
-            m_writer.write("@"+Constant.R13+"\n");
-            m_writer.write("M=D\n"); //put the calculated address into R13
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n");
-            m_writer.write("A=M\n");
-            m_writer.write("D=M\n"); //put variable from stack to D
+            writeASMLineWithComment("@"+Constant.R13+"");
+            writeASMLineWithComment("M=D"); //put the calculated address into R13
+            writeASMLineWithComment("@"+Constant.SP+"");
+            writeASMLineWithComment("M=M-1");
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("D=M"); //put variable from stack to D
           //  m_writer.write("@R13\n");
-            m_writer.write("@"+Constant.R13+"\n");
-            m_writer.write("A=M\n");
-            m_writer.write("M=D\n"); //put D into the calculated address
+            writeASMLineWithComment("@"+Constant.R13+"");
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("M=D"); //put D into the calculated address
 
         }else if(instr.getArg1().equals("that")){
-            m_writer.write("@"+instr.getArg2()+"\n");
-            m_writer.write("D=A\n");
-            m_writer.write("@"+Constant.THAT+"\n");
-            m_writer.write("D=D+M\n");
+            writeASMLineWithComment("@"+instr.getArg2()+"");
+            writeASMLineWithComment("D=A");
+            writeASMLineWithComment("@"+Constant.THAT+"");
+            writeASMLineWithComment("D=D+M");
             //m_writer.write("@R13\n");
-            m_writer.write("@"+Constant.R13+"\n");
-            m_writer.write("M=D\n"); //put the calculated address into R13
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n");
-            m_writer.write("A=M\n");
-            m_writer.write("D=M\n"); //put variable from stack to D
+            writeASMLineWithComment("@"+Constant.R13+"");
+            writeASMLineWithComment("M=D"); //put the calculated address into R13
+            writeASMLineWithComment("@"+Constant.SP+"");
+            writeASMLineWithComment("M=M-1");
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("D=M"); //put variable from stack to D
           //  m_writer.write("@R13\n");
-            m_writer.write("@"+Constant.R13+"\n");
-            m_writer.write("A=M\n");
-            m_writer.write("M=D\n"); //put D into the calculated address
+            writeASMLineWithComment("@"+Constant.R13+"");
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("M=D"); //put D into the calculated address
 
         }else if(instr.getArg1().equals("temp")){
             int index=instr.getArg2()+Constant.TEMP_BASE_ADDR;
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n"); //decrease stack pointer
-            m_writer.write("A=M\n");
-            m_writer.write("D=M\n"); // put the variable into D
-            m_writer.write("@"+index+"\n");
-            m_writer.write("M=D\n");
+            writeASMLineWithComment("@"+Constant.SP+"");
+            writeASMLineWithComment("M=M-1"); //decrease stack pointer
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("D=M"); // put the variable into D
+            writeASMLineWithComment("@"+index+"");
+            writeASMLineWithComment("M=D");
 
 
 
         }else if(instr.getArg1().equals("argument")) {
-            m_writer.write("@"+instr.getArg2()+"\n");
-            m_writer.write("D=A\n");
-            m_writer.write("@"+Constant.ARG+"\n");
-            m_writer.write("D=D+M\n");
+            writeASMLineWithComment("@"+instr.getArg2()+"");
+            writeASMLineWithComment("D=A");
+            writeASMLineWithComment("@"+Constant.ARG+"");
+            writeASMLineWithComment("D=D+M");
             //m_writer.write("@R13\n");
-            m_writer.write("@"+Constant.R13+"\n");
-            m_writer.write("M=D\n"); //put the calculated address into R13
-            m_writer.write("@"+Constant.SP+"\n");
-            m_writer.write("M=M-1\n");
-            m_writer.write("A=M\n");
-            m_writer.write("D=M\n"); //put variable from stack to D
+            writeASMLineWithComment("@"+Constant.R13+"");
+            writeASMLineWithComment("M=D"); //put the calculated address into R13
+            writeASMLineWithComment("@"+Constant.SP+"");
+            writeASMLineWithComment("M=M-1");
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("D=M"); //put variable from stack to D
             // m_writer.write("@R13\n");
-            m_writer.write("@"+Constant.R13+"\n");
-            m_writer.write("A=M\n");
-            m_writer.write("M=D\n"); //put D into the calculated address
+            writeASMLineWithComment("@"+Constant.R13+"");
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("M=D"); //put D into the calculated address
 
 
         } else if(instr.getArg1().equals("pointer")){
 
             if(instr.getArg2()==0){
 
-                m_writer.write("@"+Constant.THIS+"\n");
-                m_writer.write("D=A\n");
+                writeASMLineWithComment("@"+Constant.THIS);
+                writeASMLineWithComment("D=A");
                // m_writer.write("@R13\n");
-                m_writer.write("@"+Constant.R13+"\n");
-                m_writer.write("M=D\n"); //put this address into R13
-                m_writer.write("@"+Constant.SP+"\n");
-                m_writer.write("AM=M-1\n"); //decrease stack pointer
-                m_writer.write("D=M\n"); //put variable from stack
+                writeASMLineWithComment("@"+Constant.R13);
+                writeASMLineWithComment("M=D"); //put this address into R13
+                writeASMLineWithComment("@"+Constant.SP);
+                writeASMLineWithComment("AM=M-1"); //decrease stack pointer
+                writeASMLineWithComment("D=M"); //put variable from stack
                // m_writer.write("@R13\n");
-                m_writer.write("@"+Constant.R13+"\n");
-                m_writer.write("A=M\n");
-                m_writer.write("M=D\n"); //put variable in D to This address
+                writeASMLineWithComment("@"+Constant.R13);
+                writeASMLineWithComment("A=M");
+                writeASMLineWithComment("M=D"); //put variable in D to This address
 
 
             }else if(instr.getArg2()==1){
 
-                m_writer.write("@"+Constant.THAT+"\n");
-                m_writer.write("D=A\n");
+                writeASMLineWithComment("@"+Constant.THAT);
+                writeASMLineWithComment("D=A");
                 //m_writer.write("@R13\n");
-                m_writer.write("@"+Constant.R13+"\n");
-                m_writer.write("M=D\n"); //put this address into R13
-                m_writer.write("@"+Constant.SP+"\n");
-                m_writer.write("AM=M-1\n"); //decrease stack pointer
-                m_writer.write("D=M\n"); //put variable from stack
+                writeASMLineWithComment("@"+Constant.R13);
+                writeASMLineWithComment("M=D"); //put this address into R13
+                writeASMLineWithComment("@"+Constant.SP);
+                writeASMLineWithComment("AM=M-1"); //decrease stack pointer
+                writeASMLineWithComment("D=M"); //put variable from stack
                // m_writer.write("@R13\n");
-                m_writer.write("@"+Constant.R13+"\n");
-                m_writer.write("A=M\n");
-                m_writer.write("M=D\n"); //put variable in D to This address
+                writeASMLineWithComment("@"+Constant.R13);
+                writeASMLineWithComment("A=M");
+                writeASMLineWithComment("M=D"); //put variable in D to This address
 
 
             }
@@ -545,16 +553,16 @@ public class CodeWriter {
     }
 
     public void WriteGoto(Instruction instr) throws IOException {
-        m_writer.write("@" + this.getFuncName()+"$"+instr.getArg1() + "\n");
-        m_writer.write("0;JMP\n");
+        writeASMLineWithComment("@" + this.getFuncName()+"$"+instr.getArg1() + "");
+        writeASMLineWithComment("0;JMP");
     }
 
     public void WriteIfGoTo(Instruction instr) throws IOException {
-        m_writer.write("@" + Constant.SP + "\n");
-        m_writer.write("AM=M-1\n"); //Move stack up by 1
-        m_writer.write("D=M\n");
-        m_writer.write("@" + this.getFuncName()+"$"+instr.getArg1()  + "\n");
-        m_writer.write("D;JNE\n");
+        writeASMLineWithComment("@" + Constant.SP + "");
+        writeASMLineWithComment("AM=M-1"); //Move stack up by 1
+        writeASMLineWithComment("D=M");
+        writeASMLineWithComment("@" + this.getFuncName()+"$"+instr.getArg1()  + "");
+        writeASMLineWithComment("D;JNE");
 
     }
 
@@ -573,74 +581,74 @@ public class CodeWriter {
         int TempAddrHoldFrame=Constant.R13;
         int TempAddrHoldRET=Constant.R14+1;
         //  FRAME = LCL // FRAME is a temporary variable
-        m_writer.write("@"+Constant.LCL+"\n");
-        m_writer.write("D=M\n");
-        m_writer.write("@"+TempAddrHoldFrame+"\n");
-        m_writer.write("M=D\n"); // put the LCL into Temp base addr frame=LCL
+        writeASMLineWithComment("@"+Constant.LCL);
+        writeASMLineWithComment("D=M");
+        writeASMLineWithComment("@"+TempAddrHoldFrame);
+        writeASMLineWithComment("M=D"); // put the LCL into Temp base addr frame=LCL
         // RET = *(FRAME-5) // Put the return-address in a temp. var.
-        m_writer.write("@5\n");
-        m_writer.write("D=D-A\n"); // Calculate address holding ret by LCL -5
-        m_writer.write("A=D\n");
-        m_writer.write("D=M\n"); //put value of ret into D
-        m_writer.write("@"+TempAddrHoldRET+"\n");
-        m_writer.write("M=D\n"); //put value of ret into Temp variable
+        writeASMLineWithComment("@5");
+        writeASMLineWithComment("D=D-A"); // Calculate address holding ret by LCL -5
+        writeASMLineWithComment("A=D");
+        writeASMLineWithComment("D=M"); //put value of ret into D
+        writeASMLineWithComment("@"+TempAddrHoldRET);
+        writeASMLineWithComment("M=D"); //put value of ret into Temp variable
        //  *ARG = pop() // Reposition the return value for the caller
         //below code equal to WritePop(new Instruction("pop","argument",0));
-        m_writer.write("@"+Constant.SP+"\n");
-        m_writer.write("M=M-1\n");
-        m_writer.write("A=M\n");
-        m_writer.write("D=M\n");
-        m_writer.write("@"+Constant.ARG+"\n");
-        m_writer.write("A=M\n");
-        m_writer.write("M=D\n");
+        writeASMLineWithComment("@"+Constant.SP);
+        writeASMLineWithComment("M=M-1");
+        writeASMLineWithComment("A=M");
+        writeASMLineWithComment("D=M");
+        writeASMLineWithComment("@"+Constant.ARG);
+        writeASMLineWithComment("A=M");
+        writeASMLineWithComment("M=D");
 
 
         //  SP = ARG+1 // Restore SP of the caller
-        m_writer.write("@"+Constant.ARG+"\n");
-        m_writer.write("D=M+1\n");
-        m_writer.write("@"+Constant.SP+"\n");
-        m_writer.write("M=D\n");//restore  stack pointer and SP=ARG+1
+        writeASMLineWithComment("@"+Constant.ARG);
+        writeASMLineWithComment("D=M+1");
+        writeASMLineWithComment("@"+Constant.SP);
+        writeASMLineWithComment("M=D");//restore  stack pointer and SP=ARG+1
         //THAT = *(FRAME-1) // Restore THAT of the caller
-        m_writer.write("@"+TempAddrHoldFrame+"\n");
-        m_writer.write("D=M\n");
-        m_writer.write("@1\n");
-        m_writer.write("D=D-A\n");
-        m_writer.write("A=D\n");
-        m_writer.write("D=M\n");
-        m_writer.write("@"+Constant.THAT+"\n");
-        m_writer.write("M=D\n");
+        writeASMLineWithComment("@"+TempAddrHoldFrame);
+        writeASMLineWithComment("D=M");
+        writeASMLineWithComment("@1");
+        writeASMLineWithComment("D=D-A");
+        writeASMLineWithComment("A=D");
+        writeASMLineWithComment("D=M");
+        writeASMLineWithComment("@"+Constant.THAT);
+        writeASMLineWithComment("M=D");
         // THIS = *(FRAME-2) // Restore THIS of the caller
-        m_writer.write("@"+TempAddrHoldFrame+"\n");
-        m_writer.write("D=M\n");
-        m_writer.write("@2\n");
-        m_writer.write("D=D-A\n");
-        m_writer.write("A=D\n");
-        m_writer.write("D=M\n");
-        m_writer.write("@"+Constant.THIS+"\n");
-        m_writer.write("M=D\n");
+        writeASMLineWithComment("@"+TempAddrHoldFrame);
+        writeASMLineWithComment("D=M");
+        writeASMLineWithComment("@2");
+        writeASMLineWithComment("D=D-A");
+        writeASMLineWithComment("A=D");
+        writeASMLineWithComment("D=M");
+        writeASMLineWithComment("@"+Constant.THIS);
+        writeASMLineWithComment("M=D");
         // ARG = *(FRAME-3) // Restore ARG of the caller
-        m_writer.write("@"+TempAddrHoldFrame+"\n");
-        m_writer.write("D=M\n");
-        m_writer.write("@3\n");
-        m_writer.write("D=D-A\n");
-        m_writer.write("A=D\n");
-        m_writer.write("D=M\n");
-        m_writer.write("@"+Constant.ARG+"\n");
-        m_writer.write("M=D\n");
+        writeASMLineWithComment("@"+TempAddrHoldFrame);
+        writeASMLineWithComment("D=M");
+        writeASMLineWithComment("@3");
+        writeASMLineWithComment("D=D-A");
+        writeASMLineWithComment("A=D");
+        writeASMLineWithComment("D=M");
+        writeASMLineWithComment("@"+Constant.ARG);
+        writeASMLineWithComment("M=D");
         //LCL = *(FRAME-4) // Restore LCL of the caller
-        m_writer.write("@"+TempAddrHoldFrame+"\n");
-        m_writer.write("D=M\n");
-        m_writer.write("@4\n");
-        m_writer.write("D=D-A\n");
-        m_writer.write("A=D\n");
-        m_writer.write("D=M\n");
-        m_writer.write("@"+Constant.LCL+"\n");
-        m_writer.write("M=D\n");
+        writeASMLineWithComment("@"+TempAddrHoldFrame);
+        writeASMLineWithComment("D=M");
+        writeASMLineWithComment("@4");
+        writeASMLineWithComment("D=D-A");
+        writeASMLineWithComment("A=D");
+        writeASMLineWithComment("D=M");
+        writeASMLineWithComment("@"+Constant.LCL);
+        writeASMLineWithComment("M=D");
        //  goto RET
         // Goto return-address
-        m_writer.write("@"+TempAddrHoldRET+"\n");
-        m_writer.write("A=M\n");
-        m_writer.write("0,JMP\n");
+        writeASMLineWithComment("@"+TempAddrHoldRET);
+        writeASMLineWithComment("A=M");
+        writeASMLineWithComment("0,JMP");
 
     }
 
