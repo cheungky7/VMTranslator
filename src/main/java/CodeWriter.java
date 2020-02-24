@@ -14,6 +14,8 @@ public class CodeWriter {
     private static int m_labelnum=0;
     private FileWriter m_FileWriter;
     private static int m_lineInMEM=0;
+    private String m_InFileName;
+
 
     private void writeASMLineWithComment(String line) throws IOException {
        String lineWithComment=line+" //"+m_lineInMEM+"\n";
@@ -41,6 +43,14 @@ public class CodeWriter {
 
     public String getFuncName(){
         return m_FuncName;
+    }
+
+    public void setInFileName(String inFileName){
+        m_InFileName=inFileName;
+    }
+
+    public String getInFileName(){
+        return this.m_InFileName;
     }
 
     public void close() throws IOException {
@@ -94,7 +104,7 @@ public class CodeWriter {
 
     public void WriteCall(Instruction instr) throws IOException {
        // m_writer.write("@"+Constant.SP+"\n");
-        String ret_label=this.m_fileName+"."+instr.getArg1()+"$ret."+m_labelnum;
+        String ret_label=this.m_InFileName+"."+instr.getArg1()+"$ret."+m_labelnum;
         m_labelnum++;
         // put sp into R13
       //  m_writer.write("// put sp into R13\n");
@@ -299,8 +309,10 @@ public class CodeWriter {
             writeASMLineWithComment("@"+Constant.SP);
             writeASMLineWithComment("M=M+1");
         } else if(instr.getArg1().equals("static")) {
-            int index=instr.getArg2()+Constant.STATIC_BASE_ADDR;
-            writeASMLineWithComment("@" + index );
+           // int index=instr.getArg2()+Constant.STATIC_BASE_ADDR;
+            int index=instr.getArg2();
+           // writeASMLineWithComment("@" + index );
+            writeASMLineWithComment("@"+this.m_InFileName+"."+index);
             writeASMLineWithComment("D=M");
             // writeASMLineWithComment("@SP\n");
             writeASMLineWithComment("@"+Constant.SP);
@@ -414,6 +426,7 @@ public class CodeWriter {
 
     public void WritePop(Instruction instr) throws IOException {
         if(instr.getArg1().equals("static")){
+            /*
             int index=instr.getArg2()+Constant.STATIC_BASE_ADDR;
             writeASMLineWithComment("@"+Constant.SP+"");
             writeASMLineWithComment("M=M-1"); // decrease the stack pointer first
@@ -421,8 +434,20 @@ public class CodeWriter {
             writeASMLineWithComment("D=M");//put the  variable from stack in D
             writeASMLineWithComment("@"+index+"");
             writeASMLineWithComment("M=D");//put the  variable from D to static location
-          //  m_writer.write("@"+Constant.SP+"\n");
-          //  m_writer.write("M=M-1\n");
+             */
+            //strAcode = new StringBuilder().append("@").append(fileName).append(nIndex).append("\nD=A\n@R13\nM=D\n@SP\nAM=M-1\nD=M\n@R13\nA=M\nM=D\n").toString();
+            int index=instr.getArg2();
+
+            writeASMLineWithComment("@"+Constant.SP);
+            writeASMLineWithComment("M=M-1"); // decrease the stack pointer first
+            writeASMLineWithComment("A=M");
+            writeASMLineWithComment("D=M");//put the  variable from stack in D
+            writeASMLineWithComment("@"+this.m_InFileName+"."+index);
+            /*
+            Each variable is assigned a unique
+            memory address, starting at 16*/
+            //according to hack specification
+            writeASMLineWithComment("M=D");//put the  variable from D to static location
 
         } else if(instr.getArg1().equals("local")){
             writeASMLineWithComment("@"+instr.getArg2()+"");

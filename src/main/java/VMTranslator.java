@@ -31,6 +31,15 @@ public class VMTranslator {
         }
     }
 
+    public static String extractFilename(String path){
+        //String fileName=null;
+        File f = new File(path);
+        String fileName=f.getName();
+        int posOfExtension = fileName.indexOf(".vm");
+        String fileNameWithoutExtension=fileName.substring(0, posOfExtension);
+        return fileNameWithoutExtension;
+    }
+
 
     public static void generateVMSingleFile(String sourceFileName){
 
@@ -66,6 +75,7 @@ public class VMTranslator {
     public static void writeToASMFile(CodeWriter coder,String sourceFileName,Integer lineNo) throws IOException {
 
         Parser parser = new Parser(sourceFileName);
+        coder.setInFileName(extractFilename(sourceFileName));
         while(parser.hasMoreCommands()==true){
             parser.advance();
             Instruction parsedInstr=parser.getParsedInstr();
