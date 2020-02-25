@@ -125,13 +125,46 @@ public class CodeWriter {
         writeASMLineWithComment("@"+Constant.SP);
         writeASMLineWithComment("M=M+1");
         m_writer.write("//push local\n");
-        WritePush(new Instruction("push","local",0));
+        //WritePush(new Instruction("push","local",0));
+
+
+
         m_writer.write("//push argument\n");
-        WritePush(new Instruction("push","argument",0));
+        //WritePush(new Instruction("push","argument",0));
+        writeASMLineWithComment("@" + Constant.ARG);
+        writeASMLineWithComment("D=A");
+        // m_writer.write("@SP\n");
+        writeASMLineWithComment("@"+Constant.SP);
+        writeASMLineWithComment("A=M");
+        writeASMLineWithComment("M=D");
+        //m_writer.write("@SP");
+        writeASMLineWithComment("@"+Constant.SP);
+        writeASMLineWithComment("M=M+1");
+
         m_writer.write("//push this\n");
-        WritePush(new Instruction("push","this",0));
+      //  WritePush(new Instruction("push","this",0));
+        writeASMLineWithComment("@" + Constant.THIS );
+        writeASMLineWithComment("D=A");
+        // m_writer.write("@SP\n");
+        writeASMLineWithComment("@"+Constant.SP);
+        writeASMLineWithComment("A=M");
+        writeASMLineWithComment("M=D");
+        //m_writer.write("@SP");
+        writeASMLineWithComment("@"+Constant.SP);
+        writeASMLineWithComment("M=M+1");
+
         m_writer.write("//push that\n");
-        WritePush(new Instruction("push","that",0));
+        //WritePush(new Instruction("push","that",0));
+        writeASMLineWithComment("@" + Constant.THAT );
+        writeASMLineWithComment("D=A");
+        // m_writer.write("@SP\n");
+        writeASMLineWithComment("@"+Constant.SP);
+        writeASMLineWithComment("A=M");
+        writeASMLineWithComment("M=D");
+        //m_writer.write("@SP");
+        writeASMLineWithComment("@"+Constant.SP);
+        writeASMLineWithComment("M=M+1");
+
         // ARG = sp-n-5
         m_writer.write("// ARG = sp-n-5\n");
         writeASMLineWithComment("@"+Constant.SP);
