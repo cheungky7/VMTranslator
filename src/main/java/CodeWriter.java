@@ -273,7 +273,7 @@ public class CodeWriter {
             writeASMLineWithComment("@"+Constant.SP);
             writeASMLineWithComment("A=M");
             writeASMLineWithComment("M=0");
-            m_writer.write("(LT_LABEL"+this.ltCmdCounter+")");
+            m_writer.write("(LT_LABEL"+this.ltCmdCounter+")\n");
             writeASMLineWithComment("@"+Constant.SP);
             writeASMLineWithComment("M=M+1");
             ltCmdCounter++;
