@@ -104,7 +104,7 @@ public class CodeWriter {
 
     public void WriteCall(Instruction instr) throws IOException {
        // m_writer.write("@"+Constant.SP+"\n");
-        String ret_label=this.m_InFileName+"."+instr.getArg1()+"$ret."+m_labelnum;
+        String ret_label=instr.getArg1()+"$ret."+m_labelnum;
         m_labelnum++;
         // put sp into R13
       //  m_writer.write("// put sp into R13\n");
