@@ -128,7 +128,7 @@ public class CodeWriter {
         m_writer.write("//push local\n");
         //WritePush(new Instruction("push","local",0));
         writeASMLineWithComment("@" + Constant.LCL );
-        writeASMLineWithComment("D=A");
+        writeASMLineWithComment("D=M");
         // m_writer.write("@SP\n");
         writeASMLineWithComment("@"+Constant.SP);
         writeASMLineWithComment("A=M");
