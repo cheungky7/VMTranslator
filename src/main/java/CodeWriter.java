@@ -132,7 +132,7 @@ public class CodeWriter {
         m_writer.write("//push argument\n");
         //WritePush(new Instruction("push","argument",0));
         writeASMLineWithComment("@" + Constant.ARG);
-        writeASMLineWithComment("D=A");
+        writeASMLineWithComment("D=M");
         // m_writer.write("@SP\n");
         writeASMLineWithComment("@"+Constant.SP);
         writeASMLineWithComment("A=M");
@@ -144,7 +144,7 @@ public class CodeWriter {
         m_writer.write("//push this\n");
       //  WritePush(new Instruction("push","this",0));
         writeASMLineWithComment("@" + Constant.THIS );
-        writeASMLineWithComment("D=A");
+        writeASMLineWithComment("D=M");
         // m_writer.write("@SP\n");
         writeASMLineWithComment("@"+Constant.SP);
         writeASMLineWithComment("A=M");
@@ -156,7 +156,7 @@ public class CodeWriter {
         m_writer.write("//push that\n");
         //WritePush(new Instruction("push","that",0));
         writeASMLineWithComment("@" + Constant.THAT );
-        writeASMLineWithComment("D=A");
+        writeASMLineWithComment("D=M");
         // m_writer.write("@SP\n");
         writeASMLineWithComment("@"+Constant.SP);
         writeASMLineWithComment("A=M");
