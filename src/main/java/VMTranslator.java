@@ -49,7 +49,7 @@ public class VMTranslator {
           //  String outFile=fileName+".asm";
 
             Parser parser = new Parser(sourceFileName);
-            CodeWriter coder=new CodeWriter(fileName);
+            CodeWriter coder=new CodeWriter(fileName,false);
             int line=0;
             //coder.InitMemorySegement();
             while(parser.hasMoreCommands()==true){
@@ -112,7 +112,7 @@ public class VMTranslator {
 
         try {
             Integer lineNo=0;
-            CodeWriter coder = new CodeWriter(path);
+            CodeWriter coder = new CodeWriter(path,true);
             coder.writeBoostStrapCode();
             for (String s : result) {
                 System.out.println("Read: " + s);

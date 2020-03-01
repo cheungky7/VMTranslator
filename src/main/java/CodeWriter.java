@@ -24,8 +24,12 @@ public class CodeWriter {
     }
 
 
-    public CodeWriter(String fileName) throws IOException {
-        m_outfileName= fileName+".asm";
+    public CodeWriter(String fileName,boolean isfolder) throws IOException {
+        if(isfolder==true){
+            m_outfileName =fileName+"\\"+fileName + ".asm"; // should place inside source folder if source vm file is more than 1.
+        }else {
+            m_outfileName = fileName + ".asm";
+        }
         m_fileName=fileName;
         //setFuncName(fileName);
         m_FuncName=null;
