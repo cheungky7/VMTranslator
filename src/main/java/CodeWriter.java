@@ -26,7 +26,7 @@ public class CodeWriter {
 
     public CodeWriter(String fileName,boolean isfolder) throws IOException {
         if(isfolder==true){
-            m_outfileName =fileName+"\\"+fileName + ".asm"; // should place inside source folder if source vm file is more than 1.
+            m_outfileName =fileName+"/"+fileName + ".asm"; // should place inside source folder if source vm file is more than 1.
         }else {
             m_outfileName = fileName + ".asm";
         }
